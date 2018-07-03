@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Trakaro</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="trakaro.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<body style="font-family: Arial, Helvetica, sans-serif; background-color: #f2f2f2; margin: 0vw !important;">
+<div id="loader" style="position:fixed; padding:0vw; margin:0vw; z-index: 1000; top:0; left:0; width: 100%; height: 100%; background:rgba(0, 0, 0, 0.637)">
+        <div class="loader"></div>
+    </div>
+    <div id="main-container" style=" display: block; margin: auto; margin-top: 0vw !important; background-color: white; width: 60vw;">
+        <div id="header">
+            <p style="float: left; margin-left: 15.5vw; position: relative; text-align: center; color: #FCA000; font-weight: bold; font-size: 3vw;">FYLLA RATINGS</p>
+            <img src="FYLLA-Icon.png" style="margin-right: 15.5vw; position: relative; width: 5vw; transform: rotate(20deg);"/>
+        </div>
+        <br/>
+        <div style="background-color: #F2F2F2; height: 0.2vw; opacity: 0.2; width: 100%;"></div>
+        <div style="padding: 2vw; color: black; font-size: 2vw; font-weight: bold;">
+            FOOD SOURCE NETWORK
+        </div>
+
+        <div id="beef-container" style="margin-top: 0vw !important; margin-bottom: 0vw !important; background-color: white; width: 56vw; padding: 1vw 2vw 1vw 2vw;">
+            <div style="padding: 0vw 1vw 1vw 1vw; color: #808080; font-size: 1.5vw;">
+                <img src="Beef1.png" style="vertical-align: middle; width: 4vw;"/> Beef 
+                <img src="plus.png" style="width: 3vw;" align="right" onclick="addNewItem(this.parentNode.parentNode.id, '','',false);"/>
+            </div>
+            <div style="background-color: #F2F2F2; height: 0.2vw; opacity: 0.2; width: 100%;"></div>
+            <div style="padding: 0vw 2vw 0vw 2vw; margin-top: 1vw; ">
+            </div>
+        </div>
+
+        <div id="pork-container" style="margin-top: 3vw !important; margin-bottom: 0vw !important; background-color: white; width: 56vw; padding: 1vw 2vw 1vw 2vw;">
+            <div style="padding: 0vw 1vw 1vw 1vw; color: #808080; font-size: 1.5vw;">
+                <img src="Pork1.png" style="vertical-align: middle; width: 4vw;"/> Pork
+                <img src="plus.png" style="width: 3vw;" align="right" onclick="addNewItem(this.parentNode.parentNode.id, '','',false);"/>
+            </div>
+            <div style="background-color: #F2F2F2; height: 0.2vw; opacity: 0.2; width: 100%;"></div>
+            <div style="padding: 0vw 2vw 0vw 2vw; margin-top: 1vw; ">
+            </div>
+        </div>
+
+        <div id="chicken-container" style="margin-top: 3vw !important; margin-bottom: 3vw !important; background-color: white; width: 56vw; padding: 1vw 2vw 1vw 2vw;">
+            <div style="padding: 0vw 1vw 1vw 1vw; color: #808080; font-size: 1.5vw;">
+                <img src="Chicken1.png" style="vertical-align: middle; width: 4vw;"/> Chicken
+                <img src="plus.png" style="width: 3vw;" align="right" onclick="addNewItem(this.parentNode.parentNode.id, '','',false);"/>
+            </div>
+            <div style="background-color: #F2F2F2; height: 0.2vw; opacity: 0.2; width: 100%;"></div>
+            <div style="padding: 0vw 2vw 0vw 2vw; margin-top: 1vw; ">
+            </div>
+        </div>
+
+        <div id="fish-container" style="margin-top: 0vw !important; margin-bottom: 0vw !important; background-color: white; width: 56vw; padding: 1vw 2vw 1vw 2vw;">
+            <div style="padding: 0vw 1vw 1vw 1vw; color: #808080; font-size: 1.5vw;">
+                <img src="Fish1.png" style="vertical-align: middle; width: 4vw;"/> Fish
+                <img src="plus.png" style="width: 3vw;" align="right" onclick="addNewItem(this.parentNode.parentNode.id, '','',false);"/>
+            </div>
+            <div style="background-color: #F2F2F2; height: 0.2vw; opacity: 0.2; width: 100%;"></div>
+            <div style="padding: 0vw 2vw 0vw 2vw; margin-top: 1vw; ">
+            </div>
+        </div>
+
+        <div id="crustacean-container" style="margin-top: 3vw !important; margin-bottom: 0vw !important; background-color: white; width: 56vw; padding: 1vw 2vw 1vw 2vw;">
+            <div style="padding: 0vw 1vw 1vw 1vw; color: #808080; font-size: 1.5vw;">
+                <img src="Seafood1.png" style="vertical-align: middle; width: 4vw;"/> Crustacean
+                <img src="plus.png" style="width: 3vw;" align="right" onclick="addNewItem(this.parentNode.parentNode.id, '','',false);"/>
+            </div>
+            <div style="background-color: #F2F2F2; height: 0.2vw; opacity: 0.2; width: 100%;"></div>
+            <div style="padding: 0vw 2vw 0vw 2vw; margin-top: 1vw; ">
+            </div>
+        </div>
+
+        <div id="vegespice-container" style="margin-top: 3vw !important; margin-bottom: 3vw !important; background-color: white; width: 56vw; padding: 1vw 2vw 1vw 2vw;">
+            <div style="padding: 0vw 1vw 1vw 1vw; color: #808080; font-size: 1.5vw;">
+                <img src="Vegetable1.png" style="vertical-align: middle; width: 4vw;"/> Vegetable and Spice
+                <img src="plus.png" style="width: 3vw;" align="right" onclick="addNewItem(this.parentNode.parentNode.id, '','',false);"/>
+            </div>
+            <div style="background-color: #F2F2F2; height: 0.2vw; opacity: 0.2; width: 100%;"></div>
+            <div style="padding: 0vw 2vw 0vw 2vw; margin-top: 1vw; ">
+            </div>
+        </div>
+
+        <div id="egg-container" style="margin-top: 0vw !important; margin-bottom: 0vw !important; background-color: white; width: 56vw; padding: 1vw 2vw 1vw 2vw;">
+            <div style="padding: 0vw 1vw 1vw 1vw; color: #808080; font-size: 1.5vw;">
+                <img src="Egg1.png" style="vertical-align: middle; width: 4vw;"/> Egg
+                <img src="plus.png" style="width: 3vw;" align="right" onclick="addNewItem(this.parentNode.parentNode.id, '','',false);"/>
+            </div>
+            <div style="background-color: #F2F2F2; height: 0.2vw; opacity: 0.2; width: 100%;"></div>
+            <div style="padding: 0vw 2vw 0vw 2vw; margin-top: 1vw; ">
+            </div>
+        </div>
+
+        <div id="water-container" style="margin-top: 3vw !important; margin-bottom: 0vw !important; background-color: white; width: 56vw; padding: 1vw 2vw 1vw 2vw;">
+            <div style="padding: 0vw 1vw 1vw 1vw; color: #808080; font-size: 1.5vw;">
+                <img src="Water1.png" style="vertical-align: middle; width: 4vw;"/> Water
+                <img src="plus.png" style="width: 3vw;" align="right" onclick="addNewItem(this.parentNode.parentNode.id, '','',false);"/>
+            </div>
+            <div style="background-color: #F2F2F2; height: 0.2vw; opacity: 0.2; width: 100%;"></div>
+            <div style="padding: 0vw 2vw 0vw 2vw; margin-top: 1vw; ">
+            </div>
+        </div>
+
+        <div id="beverage-container" style="margin-top: 3vw !important; margin-bottom: 3vw !important; background-color: white; width: 56vw; padding: 1vw 2vw 1vw 2vw;">
+            <div style="padding: 0vw 1vw 1vw 1vw; color: #808080; font-size: 1.5vw;">
+                <img src="Beverage1.png" style="vertical-align: middle; width: 4vw;"/> Beverage
+                <img src="plus.png" style="width: 3vw;" align="right" onclick="addNewItem(this.parentNode.parentNode.id, '','',false);"/>
+            </div>
+            <div style="background-color: #F2F2F2; height: 0.2vw; opacity: 0.2; width: 100%;"></div>
+            <div style="padding: 0vw 2vw 0vw 2vw; margin-top: 1vw; ">
+            </div>
+        </div>
+
+        <div style="padding-bottom: 5vw;">
+            <div onclick="addData();" style="float: right; width: 10vw; padding: 0.5vw 1vw 0.5vw 1vw; font-size: 1vw; border-radius: 2vw; text-align: center; border: 0.2vw solid #FCA000aa; color: white; background-color: #FCA000; margin-right: 1vw;">
+                SAVE
+            </div>
+            <div onclick="location.href = 'profile2.html'" style="float: right; width: 10vw; padding: 0.5vw 1vw 0.5vw 1vw; font-size: 1vw; border-radius: 2vw; text-align: center; border: 0.2vw solid #7aa323aa; color: #7aa323;  margin-right: 1vw;">
+                DISCARD
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-storage.js"></script>
+
+    <script>
+        // Initialize Firebase
+        // TODO: Replace with your project's customized code snippet
+        var config = {
+            apiKey: "AIzaSyDdjSnZXerTyTOi7g3910IalzfxARpJXu0",
+            authDomain: "trakarotwo.firebaseapp.com",
+            databaseURL: "https://trakarotwo.firebaseio.com",
+            projectId: "trakarotwo",
+            storageBucket: "trakarotwo.appspot.com",
+            messagingSenderId: "1004981268613"
+        };
+
+        var defaultApp = firebase.initializeApp(config);
+
+        console.log(defaultApp.name);
+        var defaultStorage = defaultApp.storage();
+        var db = defaultApp.firestore();
+        const firestore = firebase.firestore();
+        const settings = {timestampsInSnapshots: true};
+        firestore.settings(settings);
+
+        var user_email = sessionStorage.getItem("email");
+
+        function initialize(){
+            db.collection("foodsource").doc(user_email).get().then(function(doc){
+                document.getElementById("loader").style.display = "none";
+                if (doc.exists) {
+                    var data = doc.data().foods;
+                    console.log(data);
+                    for(var i=0; i<data.length; i++){
+                        var id = data[i].type.toLowerCase() + "-container";
+                        addNewItem(id, data[i].name, data[i].address, data[i].live);
+                        food[id + '_location' + (($('#' + id + ' div:nth-child(3) input').length / 2))].type = data[i].type;
+                        food[id + '_location' + (($('#' + id + ' div:nth-child(3) input').length / 2))].address = data[i].address;
+                        food[id + '_location' + (($('#' + id + ' div:nth-child(3) input').length / 2))].lat = data[i].lat;
+                        food[id + '_location' + (($('#' + id + ' div:nth-child(3) input').length / 2))].lng = data[i].lng;
+                        food[id + '_location' + (($('#' + id + ' div:nth-child(3) input').length / 2))].name = data[i].name;
+                        food[id + '_location' + (($('#' + id + ' div:nth-child(3) input').length / 2))].live = data[i].live;
+                    }
+
+                    addNewItem('beef-container', "", "", false);
+                    addNewItem('pork-container', "", "", false);
+                    addNewItem('chicken-container', "", "", false);
+                    addNewItem('fish-container', "", "", false);
+                    addNewItem('crustacean-container', "", "", false);
+                    addNewItem('vegespice-container', "", "", false);
+                    addNewItem('egg-container', "", "", false);
+                    addNewItem('water-container', "", "", false);
+                    addNewItem('beverage-container', "", "", false);
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                    addNewItem('beef-container', "", "", false);
+                    addNewItem('pork-container', "", "", false);
+                    addNewItem('chicken-container', "", "", false);
+                    addNewItem('fish-container', "", "", false);
+                    addNewItem('crustacean-container', "", "", false);
+                    addNewItem('vegespice-container', "", "", false);
+                    addNewItem('egg-container', "", "", false);
+                    addNewItem('water-container', "", "", false);
+                    addNewItem('beverage-container', "", "", false);
+                }
+            }).catch(function(error){
+                console.log("Error getting document:", error);
+            });
+        }
+
+        function addNewItem(id, name, address, status){
+            $('#' + id + ' div:nth-child(3)').append(
+                '<input type="text" onkeyup="changeName(\'' + id + '_location' + (($('#' + id + ' div:nth-child(3) input').length / 2) + 1) + '\', \'' + id + '\', ' + (($('#' + id + ' div:nth-child(3) input').length / 2) + 1) + ')" placeholder="(Supplier Name)" style="border-radius: 0.5vw; font-size: 1vw; background-color: #F2F2F2; padding: 1vw; width: 15vw; border: none;" value="' + name + '"/>' +
+                '<input type="text" id="' + id + '_location' + (($('#' + id + ' div:nth-child(3) input').length / 2) + 1) + '" placeholder="(Supplier Location)" style="border-radius: 0.5vw; font-size: 1vw; background-color: #F2F2F2; margin-left: 1.4vw; padding: 1vw; width: 23vw; border: none;" value="' + address + '"/>');
+
+            if(status){
+                $('#' + id + ' div:nth-child(3)').append('<img src="Picture3.png" style="width: 6vw; vertical-align: middle; margin-left: 1.6vw;" onclick="changeLive(this.parentNode.parentNode.id, $(this).index(), \'' + (id + '_location' + (($('#' + id + ' div:nth-child(3) input').length / 2))) + '\');"/>' +
+                '<br><br>');
+            } else {
+                $('#' + id + ' div:nth-child(3)').append('<img src="Picture4.png" style="width: 6vw; vertical-align: middle; margin-left: 1.6vw;" onclick="changeLive(this.parentNode.parentNode.id, $(this).index(), \'' + (id + '_location' + (($('#' + id + ' div:nth-child(3) input').length / 2))) + '\');"/>' +
+                '<br><br>');
+            }
+
+            insertSearch(id + '_location' + (($('#' + id + ' div:nth-child(3) input').length / 2)));
+            
+        }
+
+        function changeName(food_id, parentNode, num){
+            food[food_id].name = document.getElementById(parentNode).getElementsByTagName('div')[2].getElementsByTagName('input')[num*2-2].value;
+        }
+
+        function insertSearch(id){
+
+            var input = document.getElementById(id);
+
+            food[id] = {};
+            food[id] = {
+                address: "",
+                lat: "",
+                lng: "",
+                name: "",
+                type: "",
+                live: false
+            };
+
+            var autocomplete = new google.maps.places.Autocomplete(input);
+
+            autocomplete.addListener('place_changed', function() {
+            var place = autocomplete.getPlace();
+            if (!place.geometry) {
+                // User entered the name of a Place that was not suggested and
+                // pressed the Enter key, or the Place Details request failed.
+                window.alert("No details available for input: '" + place.name + "'");
+                return;
+            }
+
+            var address = '';
+            if (place.address_components) {
+
+                food[id].address = place.formatted_address;
+                food[id].lat = place.geometry.location.lat();
+                food[id].lng = place.geometry.location.lng();
+                food[id].type = id.substr(0, 1).toUpperCase() + id.substr(1, id.indexOf("-")-1);
+
+                address = [
+                (place.address_components[0] && place.address_components[0].short_name || ''),
+                (place.address_components[1] && place.address_components[1].short_name || ''),
+                (place.address_components[2] && place.address_components[2].short_name || '')
+                ].join(' ');
+            }
+            });
+        }
+
+        function changeLive(id, myId, liveId){
+
+            var counter = 0;
+            while(myId > 0){
+                myId -= 5;
+                counter++;
+            }
+
+            counter -= 1;
+
+            var pic = document.getElementById(id).getElementsByTagName('div')[2].getElementsByTagName('img')[counter].src.split('/');
+            if(pic[pic.length-1] == 'Picture3.png'){
+                document.getElementById(id).getElementsByTagName('div')[2].getElementsByTagName('img')[counter].src = "Picture4.png";
+                food[liveId].live = false;
+            }
+            else{
+                document.getElementById(id).getElementsByTagName('div')[2].getElementsByTagName('img')[counter].src = "Picture3.png";
+                food[liveId].live = true;
+            }
+        }
+
+        var food = {};
+        var validFood = [];
+        function addData(){
+            validFood = [];
+            for(var item in food){
+                if(!(food[item].address == "" || food[item].name == "")){
+                    validFood[validFood.length] = food[item];
+                }
+            }
+
+            var foods = {
+                foods: validFood
+            };
+
+            if(validFood.length > 0){
+                db.collection("foodsource").doc(user_email).set(foods).then(function() {
+                    alert("Successfully updated!");
+                    location.href = 'profile2.html';
+                });
+            }
+        }
+        
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoZ9vvwpXnZKRA32JSULALRH1cZrx--IM&libraries=places&callback=initialize"
+    async defer></script>
+    
+</body>
+</html>

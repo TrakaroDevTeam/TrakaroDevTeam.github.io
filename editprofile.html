@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Trakaro Website</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="trakaro.css" />
+    <script src="main.js"></script>
+    <script>
+        function save(){
+            var contact = document.getElementById("contact").value;
+            var email = document.getElementById("email").value;
+            var link = document.getElementById("link").value;
+            var address = document.getElementById("address").value;
+            var url = document.getElementById("url").value;
+            var hotelinfo = document.getElementById("textbox").value;
+            alert("contactnum: "+ contact +"\nemail: "+ email +"\nlink: "+ link +"\naddress: "+ address +"\nurl: "+ url +"\nHotel Information:"+ hotelinfo);
+        }
+    </script>
+    <style>
+    .checked {
+    color: #70AD46;
+    }
+    p {
+        font-family: Arial;
+        font-size: 1.2vw;
+    }
+</style>
+</head>
+<body style="overflow-x: hidden;">
+    <div>
+        <nav class="navbar bg-primary" style="z-index: 20; position:fixed; width:100vw; box-shadow: 0px 0px 0px 1px gray;">
+            <div class="col-sm-1"></div>
+                <div class="container-fluid">
+                    <div class="navbar-header" style="margin: 0.5vw; margin-left:-0.1vw">
+                        <img class="img-circle" src="img/TrakaroIcon.png" alt="trakaroicon" style="width: 4.7vw;"> 
+                        <img src="img/trakaro.png" alt="trakaro" style="position: relative; width: 11.7vw; top: 0.3vw"> 
+                    </div>
+                </div>
+        </nav>
+    </div>
+    <div class="container-fluid">
+  
+            <div class="row">
+              <div style="background-color:#f2f2f2; height: 100vw; position:fixed; top: 0; width: 25vw;">
+                    <div style="height:10vw; margin-top: 9vw;">
+                        <img id="prof_pic" style = "margin-left: auto; margin-right: auto; display: block; border-radius: 50%;  box-shadow: 1px 3px 10px grey; background-color:white; height: 11vw; width: 11vw;" src="logo.png">
+                        <label class="custom-file-upload">
+                        <input type="file" id="pic"/>
+                        <img style = "position: fixed; top: 9vw; left: 7vw; border-radius: 100%; opacity: 0.5; background-color:black; height: 11vw; width: 11vw; cursor: pointer" src="changeprofile.png">
+                        <img style = "position: fixed; top: 12.5vw; left: 10.5vw; border-radius: 50%; background-color: none; height: 4vw; width: 4vw; cursor: pointer" src="piclogo.png">
+                        </label>
+                        <img onclick="removeProfPic()" style = "position: fixed; top: 8.5vw; left: 14.5vw; border-radius: 50%; background-color: none; height: 3.5vw; width: 3.5vw; cursor: pointer;" src="close.png">
+                    </div>
+                    <div style="position:relative; margin-top: 2vw; margin-bottom: 2vw; padding-left: 1vw; padding-right: 1vw;">            
+                            <h3 class="card-title" align="center"><b>LIMA PARK HOTEL</b></h3>
+                            <hr>
+                            <div style="position:absolute; margin-left: 1vw;">
+                                <span style="font-size: 1.5vw;" class="fa fa-star checked"></span>
+                                <span style="font-size: 1.5vw;" class="fa fa-star checked"></span>
+                                <span style="font-size: 1.5vw;" class="fa fa-star checked"></span>
+                                <span style="font-size: 1.5vw;" class="fa fa-star checked"></span>
+                                <span style="font-size: 1.5vw;" class="fa fa-star"></span>
+                                <p class="card-text">4 reviews</p>
+                            </div>
+                            <div style="margin-left: 12vw; margin-top: -0.5vw;">
+                                    <p align="center" style="margin-bottom: 1vw; margin-top: 1.5vw">No Fylla</p>
+                                    <p align="center" style="margin-top: -1vw;">Rating Yet</p>
+                                    <img style=" width: 2.5vw; transform: rotate(15deg); margin-left: 8.5vw; margin-top: -6vw;" src="FYLLA-Icon.png" alt="logo">
+                            </div>
+<!--
+                            <img style="position: relative; top: -1vw; left: 15vw; height: 2.5vw; width: 5vw; cursor: pointer" src="LiveOff.png">
+-->
+                            <div style="margin-left: 1vw; margin-top: -1vw;">
+                            <br>
+                            <img style="height: 1.5vw; width: 1.5vw;" src="phone-call.png">
+                                <input style="margin-left:4vw; margin-top: -1.5vw; padding: 0.5vw 1vw 0.5vw 1vw" class="round0 font1" type="text" id="contact" name="contact" placeholder="Contact Number">
+                            <br><br>
+                            <img style="height: 1.5vw; width: 1.5vw;" src="email.png">
+                            <input style="margin-left:4vw; margin-top: -1.5vw; padding: 0.5vw 1vw 0.5vw 1vw" class="round0 font1" type="text" id="email" name="email" placeholder="Email">
+                            <br><br>
+                            <img style="height: 1.5vw; width: 1.5vw;" src="international.png">
+                            <input style="margin-left:4vw; margin-top: -1.5vw; padding: 0.5vw 1vw 0.5vw 1vw" class="round0 font1" type="text" id="link" name="link" placeholder="Website Link">
+                            <br><br>
+                            <img style="height: 1.5vw; width: 1.5vw;" src="maps-and-flags.png">
+                            <input style="margin-left:4vw; margin-top: -1.5vw; padding: 0.5vw 1vw 0.5vw 1vw" class="round0 font1" type="text" id="address" name="address" placeholder="Address">
+                            <br><br>
+                            <img style="height: 1.5vw; width: 1.5vw;" src="clipboard-with-pencil-.png">
+                            <input style="margin-left:4vw; margin-top: -1.5vw; padding: 0.5vw 1vw 0.5vw 1vw" class="round0 font1" type="text" id="url" name="url" placeholder="Booking Url">
+                            </div>
+                        </div>
+                
+              </div>
+              <div style=" height: 100vw; position:absolute; right: 0; top: 0vw; width: 72vw;">
+                    <img id="cover_pic" style="background-image: url('LimaPark.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center; height:40vw; width:75vw; margin-left: -1.5vw; margin-top: -10vw;">
+                    <label class="custom-file-upload">
+                        <input type="file" id="cover"/>
+                  <div style="position: absolute; top: 6vw; left: 56.5vw; padding: 0.75vw 2vw 0.75vw 2vw; margin:1vw; z-index: 2 !important; font-size:1.1vw;" class="btn-transblack">CHANGE COVER</div>
+                    </label>
+                  <div onclick="removeCover()" style="position: absolute; top: 10vw; left: 56.5vw; padding: 0.75vw 2vw 0.75vw 2vw; margin:1vw; z-index: 2 !important; font-size:1.1vw;" class="btn-transblack">REMOVE COVER</div>                  
+                  <div style="position:relative; margin-top: 1vw; margin-bottom: 2vw; margin-left: 2vw; margin-right: 2vw;">
+                        <p style="font-size:1.5vw;"><b>HOTEL INFORMATION</b></p>
+                        <hr>
+                        <div class="container" style="margin: 0vw; margin-bottom: 30vw;">
+                                <div class="row">
+                            <textarea id="textbox"></textarea>
+                                </div>
+                            </div>
+                        <br><hr>
+                        <p style="font-size:1.5vw;"><b>PHOTOS</b></p>
+
+                            <label class="custom-file-upload">
+                              <input type="file" id="files" name="files[]" multiple />
+                              <img style="opacity: 0.5; position: relative; height: 14vw; width: 21vw; margin: 0.5vw; cursor: pointer; z-index: 2;" src="addpic.png">
+                            </label>
+                              <output id="list"></output>
+                                        
+                              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+                            <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-app.js"></script>
+
+                            <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
+                            <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-firestore.js"></script>
+                            <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-storage.js"></script>
+
+                            <script src="firebase_config.js"></script>
+
+                            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoZ9vvwpXnZKRA32JSULALRH1cZrx--IM&libraries=places"
+                            async defer></script>
+
+                              <script>
+
+                                var email = "lima123@gmail.com";
+                                var pictures = [];
+                                var pic_url = [];
+                                var cover_url = [];
+
+                                function handleFileSelect(evt) {
+                                  console.log(evt);
+                                  var files = evt.target.files; // FileList object  
+
+                                  var file = files[0];
+
+                                  // Loop through the FileList and render image files as thumbnails.
+                                  for (var i = 0, f; f = files[i]; i++) {
+                              
+                                    // Only process image files.
+                                    if (!f.type.match('image.*')) {
+                                      continue;
+                                    }
+
+                                    var reader = new FileReader();
+                              
+                                    // Closure to capture the file information.
+                                    reader.onload = (function(theFile) {
+                                      return function(e) {
+                                        // Render thumbnail.
+                                        var span = document.createElement('span');
+                                        span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                                                          '" title="', escape(theFile.name), '"/><img onclick="removePic(this.parentNode, $(this.parentNode).index())" style="height: 2.5vw; width: 2.5vw; cursor: pointer" src="close-black.png">'].join('');
+                                        document.getElementById('list').insertBefore(span, null);
+                                      };
+                                    })(f);
+
+                                    reader.readAsDataURL(f);
+                                    pictures[pictures.length] = {
+                                        name: escape(f.name), 
+                                        data: reader
+                                    };
+                                  }
+                                }
+
+                                function removeProfPic(){
+                                    pic_url[0] = {};
+                                    document.getElementById('prof_pic').src = "NoPic.png";
+                                }
+
+                                function removeCover(){
+                                    cover_url[0] = {};
+                                    document.getElementById('cover_pic').style.backgroundImage = "url('CoverPhoto.png')";
+                                }                                
+
+                                function ProfileSelect(evt) {
+                                  console.log(evt);
+                                  var files = evt.target.files; // FileList object  
+
+                                  var file = files[0];
+
+                                  // Loop through the FileList and render image files as thumbnails.
+                                  for (var i = 0, f; f = files[i]; i++) {
+                              
+                                    // Only process image files.
+                                    if (!f.type.match('image.*')) {
+                                      continue;
+                                    }
+
+                                    var reader = new FileReader();
+                              
+                                    // Closure to capture the file information.
+                                    reader.onload = (function(theFile) {
+                                      return function(e) {
+                                        // Render thumbnail.
+                                        document.getElementById('prof_pic').src = e.target.result;
+                                    //    span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                                    //                      '" title="', escape(theFile.name), '"/><img onclick="removePic(this.parentNode, $(this.parentNode).index())" style="height: 2.5vw; width: 2.5vw; cursor: pointer" src="close-black.png">'].join('');
+                                    //    document.getElementById('list').insertBefore(span, null);
+                                      };
+                                    })(f);
+
+                                    reader.readAsDataURL(f);
+                                    pic_url[0] = {
+                                        name: escape(f.name), 
+                                        data: reader
+                                    };
+                                  }
+                                }                                
+                              
+                                function CoverSelect(evt) {
+                                  console.log(evt);
+                                  var files = evt.target.files; // FileList object  
+
+                                  var file = files[0];
+
+                                  // Loop through the FileList and render image files as thumbnails.
+                                  for (var i = 0, f; f = files[i]; i++) {
+                              
+                                    // Only process image files.
+                                    if (!f.type.match('image.*')) {
+                                      continue;
+                                    }
+
+                                    var reader = new FileReader();
+                              
+                                    // Closure to capture the file information.
+                                    reader.onload = (function(theFile) {
+                                      return function(e) {
+                                        // Render thumbnail.
+                                        document.getElementById('cover_pic').style.backgroundImage = "url(" + e.target.result + ")";
+                                    //    span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                                    //                      '" title="', escape(theFile.name), '"/><img onclick="removePic(this.parentNode, $(this.parentNode).index())" style="height: 2.5vw; width: 2.5vw; cursor: pointer" src="close-black.png">'].join('');
+                                    //    document.getElementById('list').insertBefore(span, null);
+                                      };
+                                    })(f);
+
+                                    reader.readAsDataURL(f);
+                                    cover_url[0] = {
+                                        name: escape(f.name), 
+                                        data: reader
+                                    };
+                                  }
+                                }  
+
+                                function removePic(index, position){ 
+                                    pictures.splice(position, 1);
+                                    index.remove();
+                                    //$('#list span:nth-child(' + index + ')').remove();
+                                }
+
+                                function uploadIt(){
+                                    console.log(cover_url[0]);
+                                    //uploadFile(0, pictures, "", "gallery");
+                                    //uploadFile(0, pic_url, "", "profile");
+                                    //uploadFile(0, cover_url, "", "cover");
+                                }
+
+                                function afterUpload(urls){
+                                    console.log(urls);//For Gallery
+                                }
+
+                                function afterUploadPicURL(urls){
+                                    console.log(urls);//For Gallery
+                                }
+
+                                function afterUploadCoverURL(urls){
+                                    console.log(urls);//For Gallery
+                                }
+
+                                function dataURItoBlob(dataURI) {
+                                    // convert base64/URLEncoded data component to raw binary data held in a string
+                                    var byteString;
+                                    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+                                        byteString = atob(dataURI.split(',')[1]);
+                                    else
+                                        byteString = unescape(dataURI.split(',')[1]);
+
+                                    // separate out the mime component
+                                    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+                                    // write the bytes of the string to a typed array
+                                    var ia = new Uint8Array(byteString.length);
+                                    for (var i = 0; i < byteString.length; i++) {
+                                        ia[i] = byteString.charCodeAt(i);
+                                    }
+
+                                    return new Blob([ia], {type:mimeString});
+                                }
+
+                                function uploadFile(index, pics, urls, type){
+                                    if(index >= pics.length){
+                                        console.log("Successfully uploaded your pictures");
+                                        if(type == "gallery")
+                                            afterUpload(urls);
+                                        else if(type == "profile")
+                                            afterUploadPicURL(urls);
+                                        else if(type == "cover")
+                                            afterUploadCoverURL(urls);
+                                        return urls;
+                                    }
+                                    
+                                    var d = new Date();
+                                    var n = d.getTime();
+                                    var filename = pics[index].name + "_" + n;
+                            
+                                    var file = dataURItoBlob(pics[index].data.result);
+
+                                    var uploadTask = defaultStorage.ref().child(email + '/' + filename).put(file);
+
+                                    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+                                        function(snapshot) {
+                                            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                                            console.log('Upload is ' + progress + '% done');
+                                            switch (snapshot.state) {
+                                                case firebase.storage.TaskState.PAUSED: // or 'paused'
+                                                    console.log('Upload is paused');
+                                                    break;
+                                                case firebase.storage.TaskState.RUNNING: // or 'running'
+                                                    console.log('Upload is running');
+                                                    break;
+                                            }
+                                        }, function(error) {
+
+                                            switch (error.code) {
+                                                case 'storage/unauthorized':
+                                                // User doesn't have permission to access the object
+                                                break;
+
+                                                case 'storage/canceled':
+                                                // User canceled the upload
+                                                break;
+
+                                                case 'storage/unknown':
+                                                // Unknown error occurred, inspect error.serverResponse
+                                                break;
+                                            }
+
+                                        }, function() {
+                                            uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+                                                urls += downloadURL + "!";
+                                                uploadFile(index+1, pics, urls, type);
+                                            });
+                                        });
+                                }
+                                document.getElementById('cover').addEventListener('change', CoverSelect, false);
+                                document.getElementById('pic').addEventListener('change', ProfileSelect, false);
+                                document.getElementById('files').addEventListener('change', handleFileSelect, false);
+                              </script>
+                         
+                         <div style="margin-left: 38.7vw; margin-top: 1vw">
+                                <button type="button" class="btn btn-success bg-tertiarygreen text-green font2" style="float:left; border-radius: 2vw; padding: 0.4vw 4vw 0.4vw 4vw; margin-right: 1.4vw;">Discard</button>
+                                <button type="button" class="btn btn-warning bg-secondary2 text-white font2" style="border-radius: 2vw; padding: 0.4vw 5vw 0.4vw 5vw" id="uploadButton" onclick="uploadIt()" onclick="save()">Save</button>
+                        </div>                     
+
+                    </div> 
+            </div>
+        </div>
+    </div>
+</body>
+</html>

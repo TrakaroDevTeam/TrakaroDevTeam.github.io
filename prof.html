@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Trakaro - Edit Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="trakaro.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <script src="main.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+    <script>
+        //document.getElementById("email").value = email;
+    var config = {
+        apiKey: "AIzaSyDdjSnZXerTyTOi7g3910IalzfxARpJXu0",
+        authDomain: "trakarotwo.firebaseapp.com",
+        databaseURL: "https://trakarotwo.firebaseio.com",
+        projectId: "trakarotwo",
+        storageBucket: "trakarotwo.appspot.com",
+        messagingSenderId: "1004981268613"
+    };
+
+    var defaultApp = firebase.initializeApp(config);
+
+    console.log(defaultApp.name);
+    var defaultStorage = defaultApp.storage();
+    var defaultFirestore = defaultApp.firestore();
+    const firestore = firebase.firestore();
+    const settings = {timestampsInSnapshots: true};
+    firestore.settings(settings);
+
+    var email = sessionStorage.getItem("email");
+    var hotel_data;
+    var contact;
+    var website;
+    var address;
+    var booking_url;
+    var info;
+    var logo_url;
+    var gallery_url;
+    var gallery_pics = [];
+    var scene = 0;
+
+    var docRef = defaultFirestore.collection("hotelAccount").doc(email);
+
+    docRef.get().then(function(doc) {
+        if (doc.exists) {
+            console.log("Document data:", doc.data());
+            hotel_data = doc.data();
+            load();
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+
+    function updateHotelData(email, contact, booking_url, website, address, info) {
+    defaultFirestore.collection('hotelAccount').doc(email).set({
+            name: hotel_data.name,
+            email: email,
+            contact: contact,
+            password: hotel_data.password, 
+            booking_url: booking_url,
+            fylla_rating: hotel_data.fylla_rating,
+            rating: hotel_data.rating,
+            website: website,     
+            info: info,  
+            address: address,
+            cover_url: hotel_data.cover_url,
+            logo_url: hotel_data.logo_url,
+            user_type: "hotel"
+        }).then(function(){
+            uploadIt();
+        });
+    }
+
+    function updateProfilePic(pic_url){
+
+        defaultFirestore.collection('hotelAccount').doc(email).update({
+            logo_url: pic_url
+        }).then(function(){
+            pic_done = true;
+            if(scene == 1){
+                location.href= 'profile2.html';
+            }else if(scene == 4){
+                if(gallery_done){
+                    location.href = 'profile2.html';
+                }
+            }else if(scene == 5){
+                if(cover_done){
+                    location.href = 'profile2.html';
+                }
+            }else if(scene == 7){
+                if(cover_done && gallery_done){
+                    location.href = 'profile2.html';
+                }
+            }
+        });
+    }
+
+    function updateCoverPic(cover_url){
+        defaultFirestore.collection('hotelAccount').doc(email).update({
+            cover_url: cover_url
+        }).then(function(){
+            cover_done = true;
+            if(scene == 2){
+                location.href= 'profile2.html';
+            }else if(scene == 5){
+                if(pic_done){
+                    location.href = 'profile2.html';
+                }
+            }else if(scene == 5){
+                if(gallery_done){
+                    location.href = 'profile2.html';
+                }
+            }else if(scene == 7){
+                if(pic_done && gallery_done){
+                    location.href = 'profile2.html';
+                }
+            }
+        });
+    }
+
+    function updateGalleryPic(gallery_url){
+        if(scene == 0){
+            defaultFirestore.collection('gallery').doc(email).set({
+                gallery_url: gallery_pics
+            }).then(function(){
+                location.href= 'profile2.html';
+            });
+        } else {
+            var gallery_array = gallery_url.split("!");
+            gallery_array = gallery_array.splice(0, gallery_array.length-1);
+            defaultFirestore.collection('gallery').doc(email).set({
+                gallery_url: gallery_pics.concat(gallery_array)
+            }).then(function(){
+                gallery_done = true;
+                if(scene == 3){
+                    location.href= 'profile2.html';
+                }else if(scene == 4){
+                    if(pic_done){
+                        location.href = 'profile2.html';
+                    }
+                }else if(scene == 6){
+                    if(cover_done){
+                        location.href = 'profile2.html';
+                    }
+                }else if(scene == 7){
+                    if(pic_done && cover_done){
+                        location.href = 'profile2.html';
+                    }
+                }
+            });
+        }
+    }
+
+    var picRef = defaultFirestore.collection("gallery").doc(email);
+    
+    var withpic;
+    picRef.get().then(function(doc) {
+        if (doc.exists) {
+            console.log("Document data:", doc.data());
+            gallery_pics = doc.data().gallery_url;
+            console.log(gallery_pics);
+            withpic = 1; 
+            load();
+        } else {
+            // doc.data() will be undefined in this case
+            withpic = 0; 
+            load();
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+
+
+    
+
+    function load(){
+        if(withpic == 1){
+            for(var i = 0; i < gallery_pics.length; i++){
+                $(oldPics).append("<div style='float:left'><img style = 'position: relative; height: 14vw; margin: 0.5vw; cursor: pointer; z-index: 2;' src= "+ gallery_pics[i] +"><img onclick='removeOldPic(this.parentNode, $(this).index())' style='height: 2.5vw; width: 2.5vw; cursor: pointer; position: absolute; margin-top: 0.5vw; margin-left: -3vw; z-index: 20;' src='close-black.png'></div>");
+            }
+        }else if(withpic == 0){
+            $(noPhoto).append("<p align='justify' style='text-indent: 3vw;'>No Photos available yet</p>");
+        }
+
+        document.getElementById("name").innerHTML = hotel_data.name != "" ? hotel_data.name.toUpperCase() : document.getElementById("name").innerHTML;
+        document.getElementById("contact").value = hotel_data.contact != "" ? hotel_data.contact : document.getElementById("contact").innerHTML;
+        document.getElementById("address").value = hotel_data.address != "" ? hotel_data.address : document.getElementById("address").innerHTML;
+        document.getElementById("website").value = hotel_data.website != "" ? hotel_data.website : document.getElementById("website").innerHTML;
+        document.getElementById("booking_url").value = hotel_data.booking_url != "" ? hotel_data.booking_url : document.getElementById("booking_url").innerHTML;
+        document.getElementById("textbox").value = hotel_data.info != "" ? hotel_data.info : document.getElementById("textbox").innerHTML;
+        document.getElementById("fylla_rating").innerHTML = hotel_data.fylla_rating != 0 ? hotel_data.fylla_rating : document.getElementById("fylla_rating").innerHTML;
+        //document.getElementById("cover_photo").innerHTML = hotel_data.cover_photo != "" ? hotel_data.cover_photo : document.getElementById("cover_photo").innerHTML;
+        //document.getElementById("hotel_logo").innerHTML = hotel_data.hotel_logo != "" ? hotel_data.hotel_logo : document.getElementById("hotel_logo").innerHTML;
+
+        document.getElementById("cover_pic").style.backgroundImage = 'url('+ hotel_data.cover_url +')';
+        document.getElementById("prof_pic").src = hotel_data.logo_url;
+
+        if(hotel_data.rating == 1){
+            document.getElementById("star1").classList.add("checked");
+        }else if(hotel_data.rating == 2){
+            document.getElementById("star1").classList.add("checked");
+            document.getElementById("star2").classList.add("checked");
+        }
+        else if(hotel_data.rating == 3){
+            document.getElementById("star1").classList.add("checked");
+            document.getElementById("star2").classList.add("checked");
+            document.getElementById("star3").classList.add("checked");
+        }
+        else if(hotel_data.rating == 4){
+            document.getElementById("star1").classList.add("checked");
+            document.getElementById("star2").classList.add("checked");
+            document.getElementById("star3").classList.add("checked");
+            document.getElementById("star4").classList.add("checked");
+        }
+        else if(hotel_data.rating == 5){
+            document.getElementById("star1").classList.add("checked");
+            document.getElementById("star2").classList.add("checked");
+            document.getElementById("star3").classList.add("checked");
+            document.getElementById("star4").classList.add("checked");
+            document.getElementById("star5").classList.add("checked");
+        }
+
+        document.getElementById("loader").style.display = "none";
+    }
+
+    function save(){
+        contact = document.getElementById("contact").value;
+        website = document.getElementById("website").value;
+        address = document.getElementById("address").value;
+        booking_url = document.getElementById("booking_url").value;
+        info = document.getElementById("textbox").value;
+        updateHotelData(email, contact, booking_url, website, address, info);
+    }
+
+
+    function discard(){
+        location.href = 'profile2.html';
+    }
+    </script>
+    <style>
+    .checked {
+    color: #70AD46;
+    }
+    p {
+        font-family: Arial;
+        font-size: 1.2vw;
+    }
+</style>
+</head>
+<body style="overflow-x: hidden;">
+<div id="loader" style="position:fixed; padding:0vw; margin:0vw; z-index: 1000; top:0; left:0; width: 100%; height: 100%; background:rgba(0, 0, 0, 0.637)">
+        <div class="loader"></div>
+    </div>
+    <div>
+        <nav class="navbar bg-primary" style="z-index: 20; position:fixed; width:100vw; box-shadow: 0px 0px 0px 1px gray;">
+            <div class="col-sm-1"></div>
+                <div class="container-fluid">
+                    <div class="navbar-header" style="margin: 0.5vw; margin-left:-0.1vw">
+                        <img class="img-circle" src="img/TrakaroIcon.png" alt="trakaroicon" style="width: 4.7vw;"> 
+                        <img src="img/trakaro.png" alt="trakaro" style="position: relative; width: 11.7vw; top: 0.3vw"> 
+                    </div>
+                </div>
+        </nav>
+    </div>
+    <div class="container-fluid">
+  
+            <div class="row">
+              <div style="background-color:#f2f2f2; height: 100vw; position:fixed; top: 0; width: 25vw;">
+                    <div style="height:10vw; margin-top: 9vw;">
+                            <img id="prof_pic" style = "margin-left: auto; margin-right: auto; display: block; border-radius: 50%;  box-shadow: 1px 3px 10px grey; background-color:white; height: 11vw; width: 11vw;" src="piclogo1.png">
+                            <label class="custom-file-upload">
+                            <input type="file" id="pic"/>
+                            <img style = "position: fixed; top: 9vw; left: 7vw; border-radius: 100%; opacity: 0.5; background-color:black; height: 11vw; width: 11vw; cursor: pointer" src="changeprofile.png">
+                            <p style = "position: fixed; top: 13.5vw; left: 9.3vw; font-size: 1.5vw; cursor: pointer"> 256 x 256 </p>                              
+                            </label>
+                            <img onclick="removeProfPic()" style = "position: fixed; top: 8.5vw; left: 14.5vw; border-radius: 50%; background-color: none; height: 3.5vw; width: 3.5vw; cursor: pointer;" src="close.png">
+                        </div>
+                    <div style="position:relative; margin-top: 2vw; margin-bottom: 2vw; padding-left: 1vw; padding-right: 1vw;">            
+                            <h3 id="name" class="card-title" align="center"><b>HOTEL NAME</b></h3>
+                            <hr>
+                            <p align="center" style="margin-top: -1vw;">No Customer and Fylla Rating Yet</p>
+                            <br>
+                            <div style="position:absolute; margin-left: 1vw;" hidden>
+                             <!--   <span style="font-size: 1.5vw;" class="fa fa-star checked"></span> -->
+                                <span id="star1" style="font-size: 1.5vw;" class="fa fa-star"></span>
+                                <span id="star2" style="font-size: 1.5vw;" class="fa fa-star"></span>
+                                <span id="star3" style="font-size: 1.5vw;" class="fa fa-star"></span>
+                                <span id="star4" style="font-size: 1.5vw;" class="fa fa-star"></span>
+                                <span id="star5" style="font-size: 1.5vw;" class="fa fa-star"></span>
+                                <p id="reviews" class="card-text">0 review</p>
+                            </div>
+                            <div style="margin-left: 12vw; margin-top: -0.5vw;" hidden>
+                                    <p id="fylla_rating" align="center" style="font-size:2vw;"><b>No</b></p>
+                                    <p align="center" style="margin-top: -1vw;">Rating Yet</p>
+                                    <img style=" width: 2.5vw; transform: rotate(15deg); margin-left: 8.5vw; margin-top: -6vw;" src="FYLLA-Icon.png" alt="logo">
+                            </div>
+<!--
+                            <img style="position: relative; top: -1vw; left: 15vw; height: 2.5vw; width: 5vw; cursor: pointer" src="LiveOff.png">
+-->
+                            <div style="margin-left: 1vw; margin-top: -1vw;">
+                            <br>
+                            <img style="height: 1.5vw; width: 1.5vw;" src="phone-call.png">
+                            <input style="margin-left:4vw; margin-top: -1.5vw; padding: 0.5vw 1vw 0.5vw 1vw" class="round0 font1" type="text" id="contact" name="contact" placeholder="Contact Number">
+                            <br><br>
+                            <img style="height: 1.5vw; width: 1.5vw;" src="international.png">
+                            <input style="margin-left:4vw; margin-top: -1.5vw; padding: 0.5vw 1vw 0.5vw 1vw" class="round0 font1" type="text" id="website" name="link" placeholder="Website Link">
+                            <br><br>
+                            <img style="height: 1.5vw; width: 1.5vw;" src="maps-and-flags.png">
+                            <input style="margin-left:4vw; margin-top: -1.5vw; padding: 0.5vw 1vw 0.5vw 1vw" class="round0 font1" type="text" id="address" name="address" placeholder="Address">
+                            <br><br>
+                            <img style="height: 1.5vw; width: 1.5vw;" src="clipboard-with-pencil-.png">
+                            <input style="margin-left:4vw; margin-top: -1.5vw; padding: 0.5vw 1vw 0.5vw 1vw" class="round0 font1" type="text" id="booking_url" name="url" placeholder="Booking Url">
+                            </div>
+                        </div>
+                
+              </div>
+              <div style=" height: 100vw; position:absolute; right: 0; top: 0vw; width: 72vw;">
+                    <p style="position:absolute; margin-top: 10vw; margin-left: 23vw; z-index: 10; font-size: 5vw; ">1030 x 550</p>
+                <img id="cover_pic" style="background-image: url('CoverPhoto.png'); background-size: cover; background-repeat: no-repeat; background-position: center; height:40vw; width:75vw; margin-left: -1.5vw; margin-top: -10vw;">
+                    <label class="custom-file-upload">
+                        <input type="file" id="cover"/>
+                    <div style="position: absolute; top: 6vw; left: 56.5vw; padding: 0.75vw 2vw 0.75vw 2vw; margin:1vw; z-index: 2 !important; font-size:1.1vw;" class="btn-transblack">CHANGE COVER</div>
+                    </label>
+                  <div onclick="removeCover()" style="position: absolute; top: 10vw; left: 56.5vw; padding: 0.75vw 2vw 0.75vw 2vw; margin:1vw; z-index: 2 !important; font-size:1.1vw;" class="btn-transblack"><b>REMOVE COVER</b></div>                  
+                  <div style="position:relative; margin-top: 1vw; margin-bottom: 2vw; margin-left: 2vw; margin-right: 2vw;">
+                        <p style="font-size:1.5vw;"><b>HOTEL INFORMATION</b></p>
+                        <hr>
+                        <div class="container" style="margin: 0vw; margin-bottom: 30vw;">
+                                <div class="row">
+                            <textarea id="textbox"></textarea>
+                                </div>
+                            </div>
+                        <br><hr>
+                        <p style="font-size:1.5vw;"><b>PHOTOS</b></p>
+
+                            <label class="custom-file-upload">
+                              <input type="file" id="files" name="files[]" multiple />
+                              <img style="opacity: 0.5; position: relative; height: 14vw; width: 21vw; margin: 0.5vw; cursor: pointer; z-index: 2;" src="addpic.png">
+                            </label>
+                              <output id="list"></output>
+                              <p style="font-size:1.5vw;">Old Photos</p>
+                            <div id="noPhoto"></div>
+                            <div id="oldPics">
+                            </div>
+                                        
+                              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+                            <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-app.js"></script>
+
+                            <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
+                            <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-firestore.js"></script>
+                            <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-storage.js"></script>
+
+                            <script src="firebase_config.js"></script>
+
+                            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoZ9vvwpXnZKRA32JSULALRH1cZrx--IM&libraries=places"
+                            async defer></script>
+
+                              <script>
+                                var pictures = [];
+                                var pic_url = [];
+                                var cover_url = [];
+
+                                function handleFileSelect(evt) {
+                                  console.log(evt);
+                                  var files = evt.target.files; // FileList object  
+
+                                  var file = files[0];
+
+                                  // Loop through the FileList and render image files as thumbnails.
+                                  for (var i = 0, f; f = files[i]; i++) {
+                              
+                                    // Only process image files.
+                                    if (!f.type.match('image.*')) {
+                                      continue;
+                                    }
+
+                                    var reader = new FileReader();
+                              
+                                    // Closure to capture the file information.
+                                    reader.onload = (function(theFile) {
+                                      return function(e) {
+                                        // Render thumbnail.
+                                        var span = document.createElement('span');
+                                        span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                                                          '" title="', escape(theFile.name), '"/><img onclick="removePic(this.parentNode, $(this.parentNode).index())" style="height: 2.5vw; width: 2.5vw; cursor: pointer; position: absolute; margin-top: -15.5vw; margin-left: -2.8vw; z-index: 20;" src="close-black.png">'].join('');
+                                        document.getElementById('list').insertBefore(span, null);
+                                      };
+                                    })(f);
+
+                                    reader.readAsDataURL(f);
+                                    pictures[pictures.length] = {
+                                        name: escape(f.name), 
+                                        data: reader
+                                    };
+                                  }
+                                }
+
+                                function removeOldPic(index, position){ 
+                                    console.log(position);
+                                    gallery_pics.splice(position-1, 1);
+                                    index.remove();
+                                    console.log(gallery_pics);
+                                    //$('#list span:nth-child(' + index + ')').remove();
+                                }
+
+                                function removeProfPic(){
+                                    pic_url[0] = {};
+                                    hotel_data.logo_url = "";
+                                    document.getElementById('prof_pic').src = "NoPic.png";
+                                }
+
+                                function removeCover(){
+                                    cover_url[0] = {};
+                                    document.getElementById('cover_pic').style.backgroundImage = "url('CoverPhoto.png')";
+                                }                                
+
+                                function ProfileSelect(evt) {
+                                  console.log(evt);
+                                  var files = evt.target.files; // FileList object  
+
+                                  var file = files[0];
+
+                                  // Loop through the FileList and render image files as thumbnails.
+                                  for (var i = 0, f; f = files[i]; i++) {
+                              
+                                    // Only process image files.
+                                    if (!f.type.match('image.*')) {
+                                      continue;
+                                    }
+
+                                    var reader = new FileReader();
+                              
+                                    // Closure to capture the file information.
+                                    reader.onload = (function(theFile) {
+                                      return function(e) {
+                                        // Render thumbnail.
+                                        document.getElementById('prof_pic').src = e.target.result;
+                                    //    span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                                    //                      '" title="', escape(theFile.name), '"/><img onclick="removePic(this.parentNode, $(this.parentNode).index())" style="height: 2.5vw; width: 2.5vw; cursor: pointer" src="close-black.png">'].join('');
+                                    //    document.getElementById('list').insertBefore(span, null);
+                                      };
+                                    })(f);
+
+                                    reader.readAsDataURL(f);
+                                    pic_url[0] = {
+                                        name: escape(f.name), 
+                                        data: reader
+                                    };
+                                  }
+                                }                                
+                              
+                                function CoverSelect(evt) {
+                                  console.log(evt);
+                                  var files = evt.target.files; // FileList object  
+
+                                  var file = files[0];
+
+                                  // Loop through the FileList and render image files as thumbnails.
+                                  for (var i = 0, f; f = files[i]; i++) {
+                              
+                                    // Only process image files.
+                                    if (!f.type.match('image.*')) {
+                                      continue;
+                                    }
+
+                                    var reader = new FileReader();
+                              
+                                    // Closure to capture the file information.
+                                    reader.onload = (function(theFile) {
+                                      return function(e) {
+                                        // Render thumbnail.
+                                        document.getElementById('cover_pic').style.backgroundImage = "url(" + e.target.result + ")";
+                                    //    span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                                    //                      '" title="', escape(theFile.name), '"/><img onclick="removePic(this.parentNode, $(this.parentNode).index())" style="height: 2.5vw; width: 2.5vw; cursor: pointer" src="close-black.png">'].join('');
+                                    //    document.getElementById('list').insertBefore(span, null);
+                                      };
+                                    })(f);
+
+                                    reader.readAsDataURL(f);
+                                    cover_url[0] = {
+                                        name: escape(f.name), 
+                                        data: reader
+                                    };
+                                  }
+                                }  
+
+                                function removePic(index, position){ 
+                                    pictures.splice(position, 1);
+                                    index.remove();
+                                    //$('#list span:nth-child(' + index + ')').remove();
+                                }
+                                
+                                var pic_done = false;
+                                var cover_done = false;
+                                var gallery_done = false;
+                                function uploadIt(){
+                                    if(pictures.length > 0){
+                                        uploadFile(0, pictures, "", "gallery");
+                                    }
+                                    if(pic_url.length > 0){
+                                        uploadFile(0, pic_url, "", "profile");
+                                    }
+                                    if(cover_url.length > 0){
+                                        uploadFile(0, cover_url, "", "cover");
+                                    }
+                                    if(pic_url.length == 0 && cover_url.length == 0 && pictures.length == 0){
+                                        scene = 0;
+                                        var myGal = [];
+                                        updateGalleryPic(myGal);
+                                    }
+                                    if(pic_url.length > 0 && cover_url.length == 0 && pictures.length == 0){
+                                        scene = 1;
+                                    }else if(pic_url.length == 0 && cover_url.length > 0 && pictures.length == 0){
+                                        scene = 2;
+                                    }else if (pic_url.length == 0 && cover_url.length == 0 && pictures.length > 0){
+                                        scene = 3;
+                                    }else if (pic_url.length > 0 && cover_url.length == 0 && pictures.length > 0){
+                                        scene = 4;
+                                    }else if (pic_url.length > 0 && cover_url.length > 0 && pictures.length == 0){
+                                        scene = 5;
+                                    }else if (pic_url.length == 0 && cover_url.length > 0 && pictures.length > 0){
+                                        scene = 6;
+                                    }else if (pic_url.length > 0 && cover_url.length > 0 && pictures.length > 0){
+                                        scene = 7;
+                                    }
+                                    //if(pic_url.length == 0 && cover_url.length == 0){
+                                        //location.href = "profile2.html";
+                                   //}
+                                }
+                                
+                                
+                                function afterUpload(urls){
+                                    console.log(urls);//For Gallery
+                                    gallery_url = urls;
+                                    updateGalleryPic(gallery_url);
+                                }
+
+                                function afterUploadPicURL(urls){
+                                    console.log(urls);//For Gallery
+                                    pic_url = urls;
+                                    updateProfilePic(pic_url);
+                                }
+
+                                function afterUploadCoverURL(urls){
+                                    console.log(urls);//For Gallery
+                                    cover_url = urls;
+                                    updateCoverPic(cover_url);
+                                }
+
+                                function dataURItoBlob(dataURI) {
+                                    // convert base64/URLEncoded data component to raw binary data held in a string
+                                    var byteString;
+                                    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+                                        byteString = atob(dataURI.split(',')[1]);
+                                    else
+                                        byteString = unescape(dataURI.split(',')[1]);
+
+                                    // separate out the mime component
+                                    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+                                    // write the bytes of the string to a typed array
+                                    var ia = new Uint8Array(byteString.length);
+                                    for (var i = 0; i < byteString.length; i++) {
+                                        ia[i] = byteString.charCodeAt(i);
+                                    }
+
+                                    return new Blob([ia], {type:mimeString});
+                                }
+
+                                function uploadFile(index, pics, urls, type){
+                                    if(index >= pics.length){
+                                        console.log("Successfully uploaded your pictures");
+                                        if(type == "gallery")
+                                            afterUpload(urls);
+                                        else if(type == "profile")
+                                            afterUploadPicURL(urls);
+                                        else if(type == "cover")
+                                            afterUploadCoverURL(urls);
+                                        return urls;
+                                    }
+                                    
+                                    var d = new Date();
+                                    var n = d.getTime();
+                                    var filename = pics[index].name + "_" + n;
+                            
+                                    var file = dataURItoBlob(pics[index].data.result);
+
+                                    var uploadTask = defaultStorage.ref().child(email + '/' + filename).put(file);
+
+                                    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+                                        function(snapshot) {
+                                            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                                            console.log('Upload is ' + progress + '% done');
+                                            switch (snapshot.state) {
+                                                case firebase.storage.TaskState.PAUSED: // or 'paused'
+                                                    console.log('Upload is paused');
+                                                    break;
+                                                case firebase.storage.TaskState.RUNNING: // or 'running'
+                                                    console.log('Upload is running');
+                                                    break;
+                                            }
+                                        }, function(error) {
+
+                                            switch (error.code) {
+                                                case 'storage/unauthorized':
+                                                // User doesn't have permission to access the object
+                                                break;
+
+                                                case 'storage/canceled':
+                                                // User canceled the upload
+                                                break;
+
+                                                case 'storage/unknown':
+                                                // Unknown error occurred, inspect error.serverResponse
+                                                break;
+                                            }
+
+                                        }, function() {
+                                            uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+                                                urls += downloadURL + "!";
+                                                uploadFile(index+1, pics, urls, type);
+                                            });
+                                        });
+                                }
+                                document.getElementById('cover').addEventListener('change', CoverSelect, false);
+                                document.getElementById('pic').addEventListener('change', ProfileSelect, false);
+                                document.getElementById('files').addEventListener('change', handleFileSelect, false);
+                              </script>
+
+                        <!--<img style="height: 2.5vw; width: 2.5vw; position: absolute; top: 41vw; left:41vw; cursor: pointer" src="close-black.png">
+
+                        <a target="_blank" href="1.jpg">
+                                <img style="height: 14vw; width: 21vw; margin: 0.5vw" src="1.jpg">
+                        </a>
+
+                        <img style="height: 2.5vw; width: 2.5vw; position: absolute; top: 41vw; left:63.2vw; cursor: pointer" src="close-black.png">
+
+                        <a target="_blank" href="2.jpg"> 
+                        <img style="height: 14vw; width: 21vw; margin:0.5vw" src="2.jpg">
+                        </a>
+
+                        <img style="height: 2.5vw; width: 2.5vw; position: absolute; top: 56vw; left:18.8vw; cursor: pointer" src="close-black.png">
+
+                        <a target="_blank" href="3.jpg">
+                                <img style="height: 14vw; width: 21vw; margin:0.5vw" src="3.jpg">
+                        </a>
+
+                        <img style="height: 2.5vw; width: 2.5vw; position: absolute; top: 56vw; left:41vw; cursor: pointer" src="close-black.png">
+
+                        <a target="_blank" href="1.jpg">
+                                <img style="height: 14vw; width: 21vw; margin:0.5vw" src="1.jpg">
+                        </a>
+
+                        <img style="height: 2.5vw; width: 2.5vw; position: absolute; top: 56vw; left:63.2vw; cursor: pointer" src="close-black.png">
+
+                        <a target="_blank" href="2.jpg"> 
+                                <img style="height: 14vw; width: 21vw; margin:0.5vw" src="2.jpg">
+                         </a>-->
+                         
+                         <div style="clear:both; margin-left: 38.7vw; margin-top: 10vw">
+                                <button type="button" class="btn btn-success bg-tertiarygreen text-green font2" style="float:left; border-radius: 2vw; padding: 0.4vw 4vw 0.4vw 4vw; margin-right: 1.4vw;" onclick="discard()">Discard</button>
+                                <button type="button" class="btn btn-warning bg-secondary2 text-white font2" style="border-radius: 2vw; padding: 0.4vw 5vw 0.4vw 5vw" onclick="save()">Save</button>
+                        </div>                     
+
+                    </div> 
+            </div>
+        </div>
+    </div>
+</body>
+</html>

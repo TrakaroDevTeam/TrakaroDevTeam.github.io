@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Trakaro</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="trakaro.css" />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
+
+    <style>
+
+        a{
+            color: #FC2121;
+            text-decoration: none;
+            border: 4px solid #FC2121;
+            padding: 10px 15px;
+            line-height: 3;
+            -webkit-transition: all .3s ease;
+                -moz-transition: all .3s ease;
+                    -ms-transition: all .3s ease;
+                    -o-transition: all .3s ease;
+                            transition: all .3s ease;
+        }
+
+        a:hover{
+        color: #FFF;
+        background: #FC2121;
+        -webkit-transition: all .3s ease;
+            -moz-transition: all .3s ease;
+                -ms-transition: all .3s ease;
+                -o-transition: all .3s ease;
+                        transition: all .3s ease;  
+        }
+
+        #search {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            -webkit-transition: all 0.5s ease-in-out;
+            -moz-transition: all 0.5s ease-in-out;
+                -ms-transition: all 0.5s ease-in-out;
+                -o-transition: all 0.5s ease-in-out;
+                    transition: all 0.5s ease-in-out;
+            -webkit-transform: translate(0px, -100%) scale(0, 0);
+                -moz-transform: translate(0px, -100%) scale(0, 0);
+                -ms-transform: translate(0px, -100%) scale(0, 0);
+                -o-transform: translate(0px, -100%) scale(0, 0);
+                    transform: translate(0px, -100%) scale(0, 0);    
+            opacity: 0;
+            display: none;
+        }
+
+        #search.open {
+            -webkit-transform: translate(0px, 0px) scale(1, 1);
+            -moz-transform: translate(0px, 0px) scale(1, 1);
+                -ms-transform: translate(0px, 0px) scale(1, 1);
+                -o-transform: translate(0px, 0px) scale(1, 1);
+                    transform: translate(0px, 0px) scale(1, 1); 
+            opacity: 1;
+            z-index: 106;
+            display: block;
+        }
+
+        #search input {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            margin-top: -51px;
+            width: 60%;
+            margin-left: 20%;
+            color: rgb(255, 255, 255);
+            background: transparent;
+            border-top: 1px solid rgba(255, 255, 255, .8);
+            border-bottom: 2px solid rgba(255, 255, 255, .5);
+            border-left: 0px solid transparent;
+            border-right: 0px solid transparent;
+            font-size: 40px;
+            font-family: Roboto;
+            font-weight: 300;
+            text-align: center;
+            outline: none;
+            padding: 10px;
+        }
+        
+        #search .close {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            opacity: 1;
+            font-size: 27px;
+            color: #fff;
+        }
+
+        #search .close:hover{
+        color: #FC2121;
+        cursor: pointer;
+        }
+    </style>
+
+</head>
+<body style="font-family: Arial, Helvetica, sans-serif; background-color: #f2f2f2; margin: 0vw !important;">
+<div id="loader" style="position:fixed; padding:0vw; margin:0vw; z-index: 1000; top:0; left:0; width: 100%; height: 100%; background:rgba(0, 0, 0, 0.637)">
+        <div class="loader"></div>
+    </div>
+    <div id="main-container" style=" display: block; margin: auto; margin-top: 0vw !important; background-color: white; width: 60vw;">
+        <div id="header">
+            <p style="float: left; margin-left: 15.5vw; position: relative; text-align: center; color: #FCA000; font-weight: bold; font-size: 3vw;">FYLLA RATINGS</p>
+            <img src="FYLLA-Icon.png" style="margin-right: 15.5vw; position: relative; width: 5vw; transform: rotate(20deg);"/>
+        </div>
+        <br/>
+        <div style="background-color: #F2F2F2; height: 0.2vw; opacity: 0.2; width: 100%;"></div>
+        <div style="padding: 2vw; color: black; font-size: 2vw; font-weight: bold;">
+            MANPOWER PROXIMITY
+        </div>
+
+        <div id="place-container" style="margin-top: 0vw !important; margin-bottom: 0vw !important; background-color: white; width: 56vw; padding: 1vw 2vw 1vw 2vw;">
+            
+        </div>
+
+        <div id="countryDiv">
+            <div style="padding: 0vw 1vw 1vw 1vw; color: #808080; font-size: 3vw; width: 56vw; margin-left: 2vw;">
+                <img src="Picture1.png" style="vertical-align: middle; width: 8vw;"/>
+                <input style="font-size: 3vw;" id="countryInput" list="country" placeholder="Country Name" name="country">
+                <datalist id="country">
+                </datalist>
+                <div onclick="addSearch(this.parentNode)" style="float: right; width: 5vw; padding: 0.5vw 1vw 0.5vw 1vw; font-size: 1vw; border-radius: 2vw; text-align: center; border: 0.2vw solid #7aa323aa; color: #7aa323;  margin-top: 3vw; margin-right: 3vw;">
+                    ADD
+                </div>
+            </div>
+        </div>
+
+        <!--<div>
+            <img onclick="addCountrySearch();" src="Picture100.png" style="display: block; margin: auto; width: 25vw; margin-bottom: 5vw; margin-top: 5vw;">
+        </div>-->
+
+        <div style="padding-bottom: 5vw;">
+            <div onclick="addData();" style="float: right; width: 10vw; padding: 0.5vw 1vw 0.5vw 1vw; font-size: 1vw; border-radius: 2vw; text-align: center; border: 0.2vw solid #FCA000aa; color: #FCA000; margin-right: 1vw;">
+                SAVE
+            </div>
+            <div onclick="location.href = 'profile2.html'" style="float: right; width: 10vw; padding: 0.5vw 1vw 0.5vw 1vw; font-size: 1vw; border-radius: 2vw; text-align: center; border: 0.2vw solid #7aa323aa; color: #7aa323;  margin-right: 1vw;">
+                DISCARD
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-storage.js"></script>
+
+    <script src="firebase_config.js"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoZ9vvwpXnZKRA32JSULALRH1cZrx--IM&libraries=places"
+    async defer></script>
+    <script>
+        var strArray = [];
+
+        var user_email = sessionStorage.getItem("email");
+
+        $(document).ready(function(){
+            $('a[href="#search"]').on('click', function(event) {                    
+                $('#search').addClass('open');
+            });            
+            $('#search, #search button.close').on('click keyup', function(event) {
+                if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
+                    $(this).removeClass('open');
+                }
+            });
+            
+            $.get("https://jesraelcruz.github.io/country.txt", function(data) { 
+                strArray = data.split("\n");
+                for(var i=0; i<strArray.length; i = i+2){
+                    $('#country').append('<option value="' + strArray[i] + '">')
+                }
+            });
+
+            db.collection("manpower").doc(user_email).get().then(function(doc){ 
+                document.getElementById("loader").style.display = "none";
+                if (doc.exists) {
+                    for(var item in doc.data().country){
+                        var code = doc.data().country[item].code;
+                        addOldCountry(item, code);
+                        for(var i=0; i<doc.data().country[item].data.length; i++){
+                            var lat = doc.data().country[item].data[i].lat;
+                            var lng = doc.data().country[item].data[i].lng;
+                            var residents = doc.data().country[item].data[i].residents;
+                            var live = doc.data().country[item].data[i].live;
+                            var province = doc.data().country[item].data[i].province;
+
+                            addOldSearch(item, code, province, lat, lng, residents, live, i);
+                        }
+                    }
+                } else {
+                    console.log("No such document!");
+                }
+            });
+        });
+
+        function addCountrySearch(){
+            if($('#countryDiv div').length == 0){
+                $('#countryDiv').append(
+                    '<div style="padding: 0vw 1vw 1vw 1vw; color: #808080; font-size: 3vw; width: 56vw; margin-left: 2vw;">' + 
+                        '<img src="Picture1.png" style="vertical-align: middle; width: 8vw;"/> ' +
+                        '<input style="font-size: 3vw;" id="countryInput" list="country" name="country">' +
+                        '<datalist id="country">' +
+                        '</datalist>' + 
+                        '<div onclick="addSearch(this.parentNode)" style="float: right; width: 5vw; padding: 0.5vw 1vw 0.5vw 1vw; font-size: 1vw; border-radius: 2vw; text-align: center; border: 0.2vw solid #7aa323aa; color: #7aa323;  margin-top: 3vw; margin-right: 3vw;">' +
+                            'ADD' +
+                        '</div>' +
+                    '</div>');
+            }
+        }
+
+        function addOldCountry(countryName, code){
+            myCountry[countryName] = {
+                code: code,
+                data: []
+            };
+
+            var tempCountryName = countryName;
+
+            if(countryName.length > 25) {
+                tempCountryName = countryName.substring(0,24) + "...";
+            }
+
+            $('#place-container').append(
+            '<div style="padding: 0vw 1vw 1vw 1vw; color: #808080; font-size: 3vw; width: 56vw;">' + 
+                    '<img src="Picture1.png" style="vertical-align: middle; width: 8vw;"/> ' +
+                    tempCountryName + 
+                    '<img src="plus.png" style="width: 3vw; position: relative; vertical-align: middle; float:right; top: 5vw; margin-right: 2vw;" onclick="addNewItem(this.parentNode.parentNode.id, ' + $('#place-container div').length + ', \'' + countryName + '\', \'' + code + '\');"/>' +
+                '</div>' +
+                '<div style="background-color: #F2F2F2; height: 0.2vw; opacity: 0.2; width: 100%;"></div>' +
+                '<div id="' + countryName.split(' ').join('_') + '_holder" style="padding: 0vw 2vw 0vw 2vw; margin-top: 1vw; margin-bottom: 2vw;"></div>');
+        }
+
+        function addOldSearch(countryName, code, province, lat, lng, residents, live, num){
+            myCountry[countryName].data[myCountry[countryName].data.length] = {
+                    province: province,
+                    lat: lat,
+                    lng: lng,
+                    residents: residents,
+                    live: live
+                };
+
+            var tempCountryName = countryName;
+
+            if(countryName.length > 25) {
+                tempCountryName = countryName.substring(0,24) + "...";
+            }
+
+            $('#' + countryName.split(' ').join('_') + '_holder').append(
+                '<input type="text" value="' + residents + '" onkeyup="changeResident(\'' + countryName + '\', ' + (num + 1) + ', this.value)" placeholder="(Number of Employees)" style="border-radius: 0.5vw; text-align: center; font-size: 1vw; background-color: #F2F2F2; padding: 1vw; width: 11vw; border: none;"/>' +
+                '<input type="text" value="' + province + '" id="' + countryName + '_locate' + (num + 1) + '" placeholder="(Province/State of Origin)" style="border-radius: 0.5vw; font-size: 1vw; background-color: #F2F2F2; margin-left: 1.2vw; padding: 1vw; width: 27.5vw; border: none;"/>' +
+                (live ? '<img src="Picture3.png" style="width: 6vw; vertical-align: middle; margin-left: 1.3vw;" onclick="changeLive(\'' + countryName.split(' ').join('_') + '_holder' + '\', $(this).index(), \'' + (countryName + '_locate' + (num + 1)) + '\');"/>' : '<img src="Picture4.png" style="width: 6vw; vertical-align: middle; margin-left: 1.3vw;" onclick="changeLive(\'' + countryName.split(' ').join('_') + '_holder' + '\', $(this).index(), \'' + (countryName + '_locate' + (num + 1)) + '\');"/>') +
+                '<br><br>');
+
+            //insertSearch(countryName + '_locate' + (num + 1), code, countryName, (num + 1));
+        }
+
+        myCountry = {};
+
+        function addSearch(myParent){
+            var parentNode = myParent.getElementsByTagName('input')[0].value;
+            if(parentNode.trim() != ""){
+                var country = false;
+                var countryName = "";
+                var code = "";
+
+                for(var i=0; i<strArray.length; i+=2){
+                    if(parentNode.toLowerCase() == strArray[i].toLowerCase()){
+                        country = true;
+                        countryName = strArray[i].toLowerCase();
+                        countryName = countryName.substr(0, 1).toUpperCase() + countryName.substr(1, countryName.length);
+                        code = strArray[i+1];
+                        break;
+                    }
+                }
+
+                if(country){
+                    for(var item in myCountry){
+                        if(item == countryName){
+                            alert("Country has already been selected");
+                            myParent.getElementsByTagName('input')[0].value = "";
+                            return;
+                        }
+                    }
+                    myCountry[countryName] = {
+                        code: code,
+                        data: [{
+                            province: "",
+                            lat: "",
+                            lng: "",
+                            residents: 0,
+                            live: false
+                        }]
+                    };
+
+                    var tempCountryName = countryName;
+
+                    if(countryName.length > 25) {
+                        tempCountryName = countryName.substring(0,24) + "...";
+                    }
+
+                    $('#place-container').append(
+                        '<div style="padding: 0vw 1vw 1vw 1vw; color: #808080; font-size: 3vw; width: 56vw;">' + 
+                            '<img src="Picture1.png" style="vertical-align: middle; width: 8vw;"/> ' +
+                            tempCountryName + 
+                            '<img src="plus.png" style="width: 3vw; position: relative; vertical-align: middle; float:right; top: 5vw; margin-right: 2vw;" onclick="addNewItem(this.parentNode.parentNode.id, ' + $('#place-container div').length + ', \'' + countryName + '\', \'' + code + '\');"/>' +
+                        '</div>' +
+                        '<div style="background-color: #F2F2F2; height: 0.2vw; opacity: 0.2; width: 100%;"></div>' +
+                        '<div id="' + countryName.split(' ').join('_') + '_holder" style="padding: 0vw 2vw 0vw 2vw; margin-top: 1vw; margin-bottom: 2vw;">' +
+                            '<input type="text" onkeyup="changeResident(\'' + countryName + '\', 1, this.value)" placeholder="(Number of Employees)" style="border-radius: 0.5vw; text-align: center; font-size: 1vw; background-color: #F2F2F2; padding: 1vw; width: 11vw; border: none;"/>' +
+                            '<input type="text" id="' + countryName + '_locate1" placeholder="(Province/State of Origin)" style="border-radius: 0.5vw; font-size: 1vw; background-color: #F2F2F2; margin-left: 1.2vw; padding: 1vw; width: 27.5vw; border: none;"/>' +
+                            '<img src="Picture4.png" style="width: 6vw; vertical-align: middle; margin-left: 1.3vw;" onclick="changeLive(\'' + countryName.split(' ').join('_') + '_holder' + '\', $(this).index(), \'' + (countryName + '_locate1') + '\');"/>' +
+                            '<br><br>' +
+                        '</div>');
+
+                    insertSearch(countryName + '_locate1', code, countryName, 1);
+
+                    myParent.getElementsByTagName('input')[0].value = "";
+                } else {
+                    alert("Not a country");
+                }
+            }
+            
+        }
+
+        function changeResident(countryName, num, value){
+            console.log(myCountry);
+            if(isNaN(parseInt(value.trim()))){
+                myCountry[countryName].data[num-1].residents = 0;
+            } else {
+                myCountry[countryName].data[num-1].residents = parseInt(value.trim());
+            }
+        }
+ 
+        function insertSearch(id, code, countryName, num){
+
+            var input = document.getElementById(id);
+
+            var options = {
+                types: ['(regions)'],
+                componentRestrictions: {country: code}
+            };
+
+            var autocomplete = new google.maps.places.Autocomplete(input, options);
+
+            autocomplete.addListener('place_changed', function() {
+                var place = autocomplete.getPlace();
+                if (!place.geometry) {
+                    // User entered the name of a Place that was not suggested and
+                    // pressed the Enter key, or the Place Details request failed.
+                    window.alert("No details available for input: '" + place.name + "'");
+                    return;
+                }
+
+                console.log(countryName);
+                
+                var address = '';
+                if (place.address_components) {
+                    if(place.types[0] == 'administrative_area_level_1' || place.types[0] == 'administrative_area_level_2'){
+                        var hasSame = false;
+                        for(var i=0; i<myCountry[countryName].data.length; i++){
+                            if(myCountry[countryName].data[i].province == place.formatted_address)
+                                hasSame = true;
+                        }
+
+                        if(!hasSame){
+                            myCountry[countryName].data[num-1].province = place.formatted_address;
+                            myCountry[countryName].data[num-1].lat = place.geometry.location.lat();
+                            myCountry[countryName].data[num-1].lng = place.geometry.location.lng();
+                            address = [
+                                (place.address_components[0] && place.address_components[0].short_name || ''),
+                                (place.address_components[1] && place.address_components[1].short_name || ''),
+                                (place.address_components[2] && place.address_components[2].short_name || '')
+                            ].join(' ');
+                        } else {
+                            alert("Province/State has been selected already");
+                            input.value = "";
+                        }
+                        
+                    } else {
+                        alert("Please enter a province/state only.")
+                        input.value = "";
+                    }
+                }
+            });
+        }
+
+    </script>
+
+    <script>
+        function addNewItem(id, index, countryName, code){
+            myCountry[countryName].data[myCountry[countryName].data.length] = {
+                province: "",
+                lat: "",
+                lng: "",
+                live: false,
+                residents: 0
+            };
+            
+            $('#' + countryName.split(' ').join('_') + '_holder').append(
+                '<input type="text" onkeyup="changeResident(\'' + countryName + '\', ' + ($('#' + id + ' div:nth-child(' + (index + 3) + ') input').length/2 + 1) + ', this.value)" placeholder="(Number of Employees)" style="border-radius: 0.5vw; text-align: center; font-size: 1vw; background-color: #F2F2F2; padding: 1vw; width: 11vw; border: none;"/>' +
+                '<input type="text" id="' + countryName + '_locate' + ($('#' + id + ' div:nth-child(' + (index + 3) + ') input').length/2 + 1) + '" placeholder="(Province/State of Origin)" style="border-radius: 0.5vw; font-size: 1vw; background-color: #F2F2F2; margin-left: 1.2vw; padding: 1vw; width: 27.5vw; border: none;"/>' +
+                '<img src="Picture4.png" style="width: 6vw; vertical-align: middle; margin-left: 1.45vw;" onclick="changeLive(\'' + countryName.split(' ').join('_') + '_holder' + '\', $(this).index(), \'' + (countryName + '_locate' + ($('#' + id + ' div:nth-child(' + (index + 3) + ') input').length/2 + 1)) + '\');"/>' +
+                '<br><br>');
+
+            insertSearch(countryName + '_locate' + ($('#' + id + ' div:nth-child(' + (index + 3) + ') input').length/2), code, countryName, ($('#' + id + ' div:nth-child(' + (index + 3) + ') input').length/2));
+        }
+
+        function changeLive(id, myId, liveId){
+            var counter = 0;
+            var cTemp = 0;
+
+            while(myId > 0){
+                myId -= 5;
+                counter++;
+            }
+
+            counter -= 1;
+
+            var pic = document.getElementById(id).getElementsByTagName('img')[counter].src.split('/');
+            if(pic[pic.length-1] == 'Picture3.png'){
+                document.getElementById(id).getElementsByTagName('img')[counter].src = "Picture4.png";
+                myCountry[liveId.substr(0, liveId.indexOf('_'))].data[parseInt(liveId.substr(liveId.indexOf('locate') + 6, liveId.length)) - 1].live = false;
+            } else {
+                document.getElementById(id).getElementsByTagName('img')[counter].src = "Picture3.png";
+                myCountry[liveId.substr(0, liveId.indexOf('_'))].data[parseInt(liveId.substr(liveId.indexOf('locate') + 6, liveId.length)) - 1].live = true;
+            }
+
+            console.log(myCountry);
+        }
+
+        var validCountry = {};
+
+        function addData(){
+            validCountry = {};
+            for(var item in myCountry){
+                for(var i=0; i<myCountry[item].data.length; i++){
+                    if(myCountry[item].data[i].province == "" || myCountry[item].data[i].residents == 0){
+                        myCountry[item].data.splice(i, 1);
+                    }
+                }
+                if(myCountry[item].data.length > 0){
+                    validCountry[item] = myCountry[item];
+                }
+            }
+            
+            var newCountry = {
+                country: validCountry
+            };
+
+            console.log(newCountry);
+
+            db.collection("manpower").doc(user_email).set(newCountry).then(function() {
+                alert("Successfully updated!");
+                location.href = 'profile2.html';
+            });
+            
+        }
+    </script>
+</body>
+</html>

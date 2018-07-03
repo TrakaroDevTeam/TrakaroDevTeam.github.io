@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Trakaro - Log In or Sign Up</title>
+        <link rel="stylesheet" type="text/css" media="screen" href="trakaro.css" />
+        <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-storage.js"></script>
+        <script>
+        var config = {
+            apiKey: "AIzaSyDdjSnZXerTyTOi7g3910IalzfxARpJXu0",
+            authDomain: "trakarotwo.firebaseapp.com",
+            databaseURL: "https://trakarotwo.firebaseio.com",
+            projectId: "trakarotwo",
+            storageBucket: "trakarotwo.appspot.com",
+            messagingSenderId: "1004981268613"
+        };
+
+        var defaultApp = firebase.initializeApp(config);
+
+        console.log(defaultApp.name);
+        var defaultStorage = defaultApp.storage();
+        var defaultFirestore = defaultApp.firestore();
+        const firestore = firebase.firestore();
+        const settings = {timestampsInSnapshots: true};
+        firestore.settings(settings);
+
+        function signup(){
+                var establishmentname = document.getElementById("establishmentname").value;
+                var email = document.getElementById("email").value;
+                var contact = document.getElementById("contact").value;
+                var password = document.getElementById("password").value;
+                var confirmpassword = document.getElementById("confirmpassword").value;
+
+                if(password != confirmpassword){
+                        alert("Password Doesn't Match");
+                }
+                else{
+                        firebase.auth().createUserWithEmailAndPassword(email, password).then(function(){
+                        defaultFirestore.collection("hotelAccount").doc(email).set({
+                                name: establishmentname,
+                                email: email,
+                                contact: contact,
+                                password: password, 
+                                booking_url: "",
+                                website: "",     
+                                fylla_rating: 0,
+                                rating: 0,
+                                info: "",              
+                                city: "",
+                                country: "",
+                                province: "",
+                                address: "",
+                                cover_url: "https://firebasestorage.googleapis.com/v0/b/trakarotwo.appspot.com/o/TrakaroStorage%2FCoverPhoto.png?alt=media&token=7494d4c2-3eb2-4b7a-b0b5-789412955aca",
+                                logo_url: "",
+                                user_type: "hotel"
+                        })
+                        .then(function() {
+                        defaultFirestore.collection("accounts").doc(email).set({
+                                name: establishmentname,
+                                status: "verification",
+                                user_type: "hotel"
+                                }).then(function(){
+                                        defaultFirestore.collection("liveTable").doc(email).set({
+                                                email: false,
+                                                contact: false, 
+                                                booking_url: false,
+                                                website: false,     
+                                                fylla_rating: false,
+                                                address: false,
+                                                info: false, 
+                                        }).then(function(){
+                                                alert("Successfully signed up");
+                                        })
+                                })
+                        })
+                        .catch(function(error) {
+                        console.error("Error writing document: ", error);
+                        });
+                }, function(error) {
+                        // Handle Errors here.
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        // ...
+                        alert(errorMessage);
+                });
+            }
+         }
+        function login(){
+        var loginemail = document.getElementById("loginemail").value;
+        var loginpassword = document.getElementById("loginpassword").value;
+        firebase.auth().signInWithEmailAndPassword(loginemail, loginpassword).then(function(){
+        alert("Successfully Logged in");
+        var docRef = defaultFirestore.collection("hotelAccount").doc(loginemail);
+        docRef.get().then(function(doc) {
+        if (doc.exists) {
+                console.log("Document data:", doc.data());
+                sessionStorage.setItem("email", doc.data().email);
+                location.href="profile2.html";
+        } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+        }
+                }).catch(function(error) {
+                        console.log("Error getting document:", error);
+                });
+        }), function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ...
+            }
+         }
+        </script>
+    </head>
+    <body class="bg" style="overflow-x: hidden;">
+        <div class="row">
+            <nav class="navbar bg-primary" style="box-shadow: 0px 0px 0px 1px gray;">
+                <div class="col-sm-1"></div>
+                    <div class="container-fluid">
+                        <div class="navbar-header" style="margin: 0.5vw">
+                                <img class="img-circle" src="img/TrakaroIcon.png" alt="trakaroicon" style="width: 4.7vw;"> 
+                                <img src="img/trakaro.png" alt="trakaro" style="position: relative; width: 11.7vw; top: 0.3vw"> 
+                        </div>
+                        <div class="col-sm-3"></div>
+                        <div class="col-xs-2" style="margin-top: 1.7vw; left: 0.7vw">
+                                <div class="input-group" style="width: 15vw;">
+                       <span class="input-group-addon round-left"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input id="loginemail" type="text" class="form-control round-right" name="email" placeholder="Email">
+                                       
+                                </div>
+                        </div>
+                        <div class="col-xs-2" style="margin-top: 1.7vw">
+                                <div class="input-group" style="width: 15vw;">
+                                        <span class="input-group-addon round-left"><i class="glyphicon glyphicon-lock"></i></span>
+                                        <input id="loginpassword" type="password" class="form-control round-right" name="password" placeholder="Password" style="border-right: 0px solid white !important">
+                                        <span class="input-group-addon round-right bg-tertiary"><i class="glyphicon glyphicon-eye-open" onclick="showPassword()" style="cursor: pointer"></i></span>
+                                </div>
+                                <script>
+                                function showPassword() {
+                                        var x = document.getElementById("loginpassword");
+                                        if (x.type === "password") {
+                                            x.type = "text";
+                                        } else {
+                                            x.type = "password";
+                                        }
+                                    }
+                            </script>
+                        </div>
+
+                                <button onclick="login()" type="button" class="btn bg-primary2" style="position: absolute; margin: 1.7vw 0vw; border-radius: 2vw; padding: 0.35vw 2.3vw 0.35vw 2.3vw">Log In</button>
+
+                    </div>
+            </nav>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2" style="padding-top:10vw">
+            </div>
+            <div class="col-md-4" style="padding-top:10vw">
+            </div>
+        </div>
+
+        <div class="row">
+                <div class="col-md-2" style="padding-top:1vw">
+
+                        <img src="img/award.png" alt="magnifyingglass" style="position: relative; top: -0.5vw; left: 12.8vw; width: 3.5vw; height: 3.5vw;"> 
+
+
+                </div>
+                <div class="col-md-4" style="padding-top:3vw">
+                    <p class="text-green font2" style="position: relative; top: -2vw;">Be certified as a sustainable business.</p>
+                </div>
+        </div>
+
+        <div class="row">
+                <div class="col-md-2" style="padding-top:1vw;">
+
+                        <img src="img/chat.png" alt="chat" style="position: relative; top: -0.5vw; left: 13vw; width: 3vw; height: 3vw;"> 
+
+                </div>
+                <div class="col-md-4" style="padding-top:3vw;">
+                        <p class="text-green font2" style="position: relative; top: -2vw;">Chat with possible customers.</p>
+                </div>
+        </div>
+
+        <div class="row">
+                <div class="col-md-2" style="padding-top:0vw;">
+
+                        <img src="img/megaphone1.png" alt="chat" style="position: relative;  top: -0.5vw; left: 11.5vw; width: 5.5vw; height: 5.5vw;"> 
+
+                </div>
+                <div class="col-md-4" style="padding-top:3vw;">
+                        <p class="text-green font2" style="position: relative; top: -2vw;">Support and promote sustainable tourism.</p>
+                </div>
+        </div>
+
+        <div class="container" style="position: absolute; top: 6.32vw; left: 59.53vw">
+                <div class="col-md-6">
+                    <div class="form-area" style="width: 28.1vw;">  
+                        <form role="form">
+                        <br style="clear:both">
+                                    <div class="font3 text-gray" style="margin-bottom: 1.3vw; text-align: center;">Create an account now</div>
+                                    <div class="form-group">
+                                    <img src="img/hotel.png" alt="usericon" style="width: 7.8vw; margin: 0vw 0vw 0vw 8vw">
+                                    </div>
+                                    <div class="form-group" style="width: 100vw;">
+                                            <button type="button" class="btn btn-success bg-tertiarygreen green-active text-green font2b" style="float:left; border-radius: 2vw; padding: 0.4vw 4vw 0.4vw 4vw; margin-right: 1vw;">Hotel</button>
+                                            <button type="button" class="btn btn-warning bg-tertiaryorange text-orange font2b" style="border-radius: 2vw; padding: 0.4vw 2.2vw 0.4vw 2.2vw">Restaurant</button>
+                                    </div> 
+                                    <div class="form-group" style="width: 23.8vw;">
+                                        <input type="text" class="form-control round" id="establishmentname" name="name" placeholder="Establishment Name" required>
+                                    </div>
+                                    <div class="form-group" style="width: 23.8vw;">
+                                        <input type="text" class="form-control round" id="email" name="email" placeholder="Email Address" required>
+                                    </div>
+                                    <div class="form-group" style="width: 23.8vw;">
+                                        <input type="text" class="form-control round" id="contact" name="contact" placeholder="Contact Number" required>
+                                    </div>
+                                    <div class="form-group" style="width: 23.8vw;">
+                                        <input type="password" class="form-control round" id="password" name="password" placeholder="Password" required>
+                                    </div>
+                                    <div class="form-group" style="width: 23.8vw;">
+                                            <input type="password" class="form-control round" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password" required>
+                                        </div>
+                            
+                                        <div class="font1b text-gray" style="margin: 1.5vw; text-align: justify;">By clicking Sign Up, you agree to our <a class="text-green" style="cursor: pointer">Terms of Use</a> and <a class="text-green" style="cursor: pointer"> Privacy Policy</a>.</div>                                    
+
+                                        <button onclick="signup()" type="button" class="btn btn-warning bg-secondary2 font3b" style="margin-left: 5.4vw; border-radius: 2vw; padding: 0.5vw 2.6vw 0.5vw 2.6vw">Sign Up</button>
+
+                                        <div class="form-group">
+                                                <img src="img/user.png" alt="usericon" style="width: 2.5vw; margin: 1vw 0vw 1vw 3vw">
+                                                <div class="font1b text-gray" style="position: relative; top: -2.7vw; left: 6.5vw">Sign up as a user? <a class="text-green" target="_blank" href="user-index.html">Click Here!</a></div>
+                                        </div> 
+
+                        </form>
+                    </div>
+                </div>
+                </div>
+
+    </body>
+</html>
