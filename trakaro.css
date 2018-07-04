@@ -55,6 +55,11 @@
     color: white;
 }
 
+.btn.greenactive {
+    background-color: #4d7023 !important;
+    color: white;
+}
+
 .bg-tertiaryorange:hover {
     background-color: #ED7D31 !important;
     color: white;
@@ -65,10 +70,43 @@
     color: white;
 }
 
+.btn.orangeactive {
+    background-color: #ED7D31 !important;
+    color: white;
+}
+
+.bg-tertiarygray {
+    background-color: gray !important;
+    color: white;
+}
+
+.bg-tertiarygray:hover {
+    background-color: white!important;
+    color: gray;
+}
+
 .btn-transblack {
     background-color:#000000b9;
     color:white;
     border: 0.2vw solid white;
+}
+
+.btn-sm-green {
+    width: 5vw;
+    padding: 0.5vw 1vw 0.5vw 1vw;
+    font-size: 1vw;
+    border-radius: 2vw;
+    text-align: center;
+    border: 0.2vw solid #7aa323aa;
+    color: #7aa323;
+    margin-top: 3vw;
+    margin-right: 3vw;
+    cursor: pointer;
+}
+
+.btn-sm-green:hover {
+    background-color: #7aa323;
+    color: white !important;
 }
 
 .btn-transblack:hover {

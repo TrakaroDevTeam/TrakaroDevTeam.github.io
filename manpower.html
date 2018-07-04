@@ -4,19 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Trakaro</title>
+    <title>Trakaro - Manpower Proximity</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="trakaro.css" />
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
 
     <style>
+
+#main-container img{
+    cursor: pointer;
+}
 
         a{
             color: #FC2121;
@@ -135,7 +140,7 @@
                 <input style="font-size: 3vw;" id="countryInput" list="country" placeholder="Country Name" name="country">
                 <datalist id="country">
                 </datalist>
-                <div onclick="addSearch(this.parentNode)" style="float: right; width: 5vw; padding: 0.5vw 1vw 0.5vw 1vw; font-size: 1vw; border-radius: 2vw; text-align: center; border: 0.2vw solid #7aa323aa; color: #7aa323;  margin-top: 3vw; margin-right: 3vw;">
+                <div onclick="addSearch(this.parentNode)" style="float: right;" class="btn-sm-green">
                     ADD
                 </div>
             </div>
@@ -146,10 +151,10 @@
         </div>-->
 
         <div style="padding-bottom: 5vw;">
-            <div onclick="addData();" style="float: right; width: 10vw; padding: 0.5vw 1vw 0.5vw 1vw; font-size: 1vw; border-radius: 2vw; text-align: center; border: 0.2vw solid #FCA000aa; color: #FCA000; margin-right: 1vw;">
+            <div onclick="addData();" class="btn btn-warning bg-secondary2 text-white font2b" style="float: right; width: 10vw; padding: 0.5vw 1vw 0.5vw 1vw; font-size: 1vw; border-radius: 2vw; text-align: center; margin-right: 1vw;">
                 SAVE
             </div>
-            <div onclick="location.href = 'profile2.html'" style="float: right; width: 10vw; padding: 0.5vw 1vw 0.5vw 1vw; font-size: 1vw; border-radius: 2vw; text-align: center; border: 0.2vw solid #7aa323aa; color: #7aa323;  margin-right: 1vw;">
+            <div onclick="location.href = 'profile2.html'" class="btn btn-success bg-tertiarygreen text-green font2b" style="float: right; width: 10vw; padding: 0.5vw 1vw 0.5vw 1vw; font-size: 1vw; border-radius: 2vw; text-align: center;  margin-right: 1vw;">
                 DISCARD
             </div>
         </div>
@@ -168,5 +173,11 @@
     async defer></script>
     
     <script src="main4.js"></script>
+    <script>
+            if(sessionStorage.getItem('email') == null || sessionStorage.getItem('email') == undefined){
+                alert('Please login to continue');
+                location.href="hotel-index.html";
+            }
+    </script>
 </body>
 </html>

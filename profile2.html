@@ -65,6 +65,20 @@
     background-color: black;
     }
 
+    #foodsource button{
+        background:#c7c6c6 !important; 
+        border: none; 
+        border-radius: 0.3vw; 
+        margin-top: 0.5vw; 
+        height: 2.5vw;
+        width: 31vw;   
+        cursor: context-menu;
+        outline: none;
+    }
+
+    #foodsource button > p {
+        padding-top: 0.25vw !important;
+    }
 
     /* Modal Content */
     .modal-content {
@@ -84,6 +98,12 @@
     right: 25px;
     font-size: 45px;
     font-weight: bold;
+    }
+
+    #manpower button{
+        cursor: context-menu;
+        outline: none;
+        background-color: #c7c6c6 !important;
     }
 
     .close:hover,
@@ -138,6 +158,14 @@
     padding: 8px 12px;
     position: absolute;
     top: 0;
+    }
+
+    #gallery img {
+        width: 21vw;
+        height: 14vw;
+        object-fit: cover;
+        float: left;
+        margin-bottom: 0.5vw;
     }
 
     img {
@@ -262,8 +290,8 @@
                         <!--<img style="height: 15vw; width: 22vw;" onclick="openModal();currentSlide(1)" class="hover-shadow cursor" src="coverPhoto.png">
                         <img style="height: 15vw; width: 22vw;" onclick="openModal();currentSlide(2)" class="hover-shadow cursor" src="coverPhoto.png">
                         <img style="height: 15vw; width: 22vw;" onclick="openModal();currentSlide(3)" class="hover-shadow cursor" src="coverPhoto.png">-->
-                        <br><br><hr>
-                        <p style="font-size:1.5vw;"><b>FYLLA RATINGS</b></p>
+                        <br><br><hr style="clear:both; border-color: white;">
+                        <p style="margin-top:2.5vw; font-size:1.5vw;"><b>FYLLA RATINGS</b></p>
                         <ul class="nav nav-tabs nav-justified" role="tablist">
                                 <li class="nav-item">
                                   <a class="nav-link active" style="color: #70AD46;" href="#foodsource" role="tab" data-toggle="tab" aria-selected="true">FOOD SOURCE</a>
@@ -281,7 +309,7 @@
                                 <div role="tabpanel" class="tab-pane fade in active" id="foodsource">
                                     <p style="margin-left: 1vw; margin-top: 2vw;" class="card-text"><b>Food Source Network</b></p>
                                     <hr>
-                                    <button style="height: 3vw; position: absolute; margin-left: 60vw; margin-top: -3vw;" type="button" class="btn btn-default" onclick="location.href='foodsource.html'"><p style="color:#999">MANAGE</p></button>
+                                    <div style="cursor: pointer; height: 3vw; position: absolute; margin-left: 60vw; margin-top: -3vw;" type="button" class="btn btn-default bg-tertiarygray text-white" onclick="location.href='foodsource.html'"><p>MANAGE</p></div>
                                     <div id="beef-container" style="margin-left: 1vw; position:relative;">
                                         <img style="height: 6vw; width: 6vw; margin-bottom: 0.5vw;" src="Beef1.png">
                                         <p style="margin-left:7vw; margin-top: -4vw; margin-bottom: 2.5vw;" class="card-text"><b>Beef</b></p>
@@ -307,7 +335,7 @@
                                     </div>  
                                     <br><br><hr>
                                     <div id="vegespice-container" style="margin-left: 1vw; position:relative">
-                                        <img style="height: 6vw; width: 6vw; margin-bottom: 0.5vw;" src="vegetable1.png">
+                                        <img style="height: 6vw; width: 6vw; margin-bottom: 0.5vw;" src="Vegetable1.png">
                                         <p style="margin-left:7vw; margin-top: -4vw; margin-bottom: 2.5vw;" class="card-text"><b>Vegetable and Spices</b></p>
                                         <button style="margin-top: 0.5vw; height: 2.5vw; width: 31vw;" type="button" class="btn"><p style="font-size: 1vw;" align="left">No Food Source Network Available yet</p></button>      
                                     </div> 
@@ -325,13 +353,13 @@
                                     </div> 
                                     <br><br><hr>
                                     <div id="beverage-container" style="margin-left: 1vw; position:relative">
-                                            <img style="height: 6vw; width: 6vw; margin-bottom: 0.5vw;" src="beverage1.png">
+                                            <img style="height: 6vw; width: 6vw; margin-bottom: 0.5vw;" src="Beverage1.png">
                                             <p style="margin-left:7vw; margin-top: -4vw; margin-bottom: 2.5vw;" class="card-text"><b>Beverage</b></p>
                                             <button style="margin-top: 0.5vw; height: 2.5vw; width: 31vw;" type="button" class="btn"><p style="font-size: 1vw;" align="left">No Food Source Network Available yet</p></button>      
                                     </div> 
                                     <br><br><hr>
                                     <div id="water-container" style="margin-left: 1vw; position:relative">
-                                            <img style="height: 6vw; width: 6vw; margin-bottom: 0.5vw;" src="water1.png">
+                                            <img style="height: 6vw; width: 6vw; margin-bottom: 0.5vw;" src="Water1.png">
                                             <p style="margin-left:7vw; margin-top: -4vw; margin-bottom: 2.5vw;" class="card-text"><b>Water</b></p>
                                             <button style="margin-top: 0.5vw; height: 2.5vw; width: 31vw;" type="button" class="btn"><p style="font-size: 1vw;" align="left">No Food Source Network Available yet</p></button>      
                                     </div> 
@@ -340,12 +368,12 @@
                                 <div role="tabpanel" class="tab-pane fade" id="manpower">
                                         <p style="margin-left: 1vw; margin-top: 2vw;" class="card-text"><b>Manpower Proximity</b></p>
                                         <hr>
-                                        <button style="height: 3vw; position: absolute; margin-left: 60vw; margin-top: -3vw;" type="button" class="btn btn-default" onclick="location.href='manpower.html'"><p style="color:#999">MANAGE</p></button>
+                                        <div style="cursor: pointer; height: 3vw; position: absolute; margin-left: 60vw; margin-top: -3vw;" type="button" class="btn btn-default bg-tertiarygray text-white" onclick="location.href='manpower.html'"><p>MANAGE</p></div>
                                     <div id="manpower-container">
                                         <div style="margin-left: 1vw; position: relative;">
                                             <img style="height: 6vw; width: 6vw;" src="Picture1.png">
                                             <p style="margin-left:7vw; margin-top: -4vw; margin-bottom: 2.5vw;" class="card-text"><b>Man Power</b></p>
-                                            <button style="margin-left: 0.5vw; margin-top: 0.75vw; height: 2.5vw; width: 6vw; border-top-left-radius: 50vw; border-bottom-left-radius: 50vw;" type="button" class="btn"><p>0</p></button> <button style="margin-left: 0.5vw; margin-top: 0.75vw; height: 2.5vw; width: 25vw; border-top-right-radius: 50vw; border-bottom-right-radius: 50vw;" type="button" class="btn"><p align="left">No Man Power Proximity Available yet</p></button>
+                                            <button style="margin-left: 0.5vw; margin-top: 0.75vw; height: 2.5vw; width: 6vw; border-top-left-radius: 50vw; border-bottom-left-radius: 50vw;" type="button"><p>0</p></button> <button style="margin-left: 0.5vw; margin-top: 0.75vw; height: 2.5vw; width: 25vw; border-top-right-radius: 50vw; border-bottom-right-radius: 50vw;" type="button" class="btn"><p align="left">No Man Power Proximity Available yet</p></button>
                                             <br><br><hr>
                                         </div> 
                                     </div>
@@ -418,6 +446,8 @@
                                         <hr>
                                         <br><br>
                                     </div>
+                                    <script>
+                                    </script>
                                     <div id="reviews" class="review" style="height: 30vw; width: 35vw; margin-left: 35vw; margin-top: 2vw; position:absolute; background-color: #f2f2f2">
                                         <p style="margin-left:1vw; margin-top: 1vw;" class="card-text"><b>Reviews</b></p>
                                          <p style="margin-left:1vw; margin-top: 1vw;" class="card-text"><b>No Reviews yet</b></p>
@@ -478,5 +508,49 @@
           </div>
 </body>
 <script src="main6.js"></script>
-
+<script>
+    if(sessionStorage.getItem('email') == null || sessionStorage.getItem('email') == undefined){
+        alert('Please login to continue');
+        location.href="hotel-index.html";
+    }
+</script>
+<script>
+    
+        function openModal() {
+          document.getElementById('myModal').style.display = "block";
+        }
+        
+        function closeModal() {
+          document.getElementById('myModal').style.display = "none";
+        }
+        
+        var slideIndex = 1;
+        showSlides(slideIndex);
+        
+        function plusSlides(n) {
+          showSlides(slideIndex += n);
+        }
+        
+        function currentSlide(n) {
+          showSlides(slideIndex = n);
+        }
+        
+        function showSlides(n) {
+          var i;
+          var slides = document.getElementsByClassName("mySlides");
+          var dots = document.getElementsByClassName("demo");
+          var captionText = document.getElementById("caption");
+          if (n > slides.length) {slideIndex = 1}
+          if (n < 1) {slideIndex = slides.length}
+          for (i = 0; i < slides.length; i++) {
+              slides[i].style.display = "none";
+          }
+          for (i = 0; i < dots.length; i++) {
+              dots[i].className = dots[i].className.replace(" active", "");
+          }
+          slides[slideIndex-1].style.display = "block";
+          dots[slideIndex-1].className += " active";
+          captionText.innerHTML = dots[slideIndex-1].alt;
+        }
+    </script>
 </html>

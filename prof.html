@@ -178,4 +178,10 @@
         </div>
     </div>
 </body>
+<script>
+        if(sessionStorage.getItem('email') == null || sessionStorage.getItem('email') == undefined){
+            alert('Please login to continue');
+            location.href="hotel-index.html";
+        }
+</script>
 </html>
