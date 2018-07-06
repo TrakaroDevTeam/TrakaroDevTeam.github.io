@@ -270,7 +270,7 @@
                         </div>
                     </div>
               <div style=" height: 100vw; position:absolute; right: 0; top: 0; width: 72vw;">
-                  <img id="cover_photo" src="coverPhoto.png" style="width:75vw; margin-left: -1.5vw; margin-top: -10vw;">
+                  <img id="cover_photo" src="coverPhoto.png" style="object-fit: cover; width:75vw; height: 50vw; margin-left: -1.5vw; margin-top: -10vw;">
                   <div class="dropdown" style="left: 58vw; top: 1vw; width: 10vw;">
                         <i data-toggle="dropdown" style="font-size: 3vw; color:#999; margin-left: 7vw; " class="fa fa-gear cursor"></i>
                         <ul class="dropdown-menu">
@@ -308,8 +308,8 @@
                               <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade in active" id="foodsource">
                                     <p style="margin-left: 1vw; margin-top: 2vw;" class="card-text"><b>Food Source Network</b></p>
-                                    <hr>
                                     <div style="cursor: pointer; height: 3vw; position: absolute; margin-left: 60vw; margin-top: -3vw;" type="button" class="btn btn-default bg-tertiarygray text-white" onclick="location.href='foodsource.html'"><p>MANAGE</p></div>
+                                    <hr>
                                     <div id="beef-container" style="margin-left: 1vw; position:relative;">
                                         <img style="height: 6vw; width: 6vw; margin-bottom: 0.5vw;" src="Beef1.png">
                                         <p style="margin-left:7vw; margin-top: -4vw; margin-bottom: 2.5vw;" class="card-text"><b>Beef</b></p>
@@ -367,13 +367,15 @@
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="manpower">
                                         <p style="margin-left: 1vw; margin-top: 2vw;" class="card-text"><b>Manpower Proximity</b></p>
-                                        <hr>
                                         <div style="cursor: pointer; height: 3vw; position: absolute; margin-left: 60vw; margin-top: -3vw;" type="button" class="btn btn-default bg-tertiarygray text-white" onclick="location.href='manpower.html'"><p>MANAGE</p></div>
+                                        <hr>
                                     <div id="manpower-container">
                                         <div style="margin-left: 1vw; position: relative;">
                                             <img style="height: 6vw; width: 6vw;" src="Picture1.png">
                                             <p style="margin-left:7vw; margin-top: -4vw; margin-bottom: 2.5vw;" class="card-text"><b>Man Power</b></p>
-                                            <button style="margin-left: 0.5vw; margin-top: 0.75vw; height: 2.5vw; width: 6vw; border-top-left-radius: 50vw; border-bottom-left-radius: 50vw;" type="button"><p>0</p></button> <button style="margin-left: 0.5vw; margin-top: 0.75vw; height: 2.5vw; width: 25vw; border-top-right-radius: 50vw; border-bottom-right-radius: 50vw;" type="button" class="btn"><p align="left">No Man Power Proximity Available yet</p></button>
+                                            <button style="margin-left: 0.5vw; margin-top: 0.75vw; height: 2.5vw; width: 6vw; border-top-left-radius: 50vw; border-bottom-left-radius: 50vw;"><p style="padding-top: 0.25vw;">0</p></button> <button style="margin-left: 0.5vw; margin-top: -0.25vw; height: 2.5vw; width: 25vw; border-top-right-radius: 50vw; border-bottom-right-radius: 50vw;" type="button" class="btn"><p align="left">No Man Power Proximity Available yet</p></button>
+                                            
+                                            
                                             <br><br><hr>
                                         </div> 
                                     </div>
