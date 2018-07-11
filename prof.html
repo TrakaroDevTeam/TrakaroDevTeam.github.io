@@ -170,11 +170,12 @@
                          
                       <script>
                       
-                          insertSearch("address");
+                          $( document ).ready(function() {
+                                insertSearch("address");
+                              alert("Yes");
+                          });
                           
                           function insertSearch(id){
-                              
-                              alert(id);
 
                             var input = document.getElementById(id);
 
