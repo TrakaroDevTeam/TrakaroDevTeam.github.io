@@ -133,7 +133,7 @@
                             <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-firestore.js"></script>
                             <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-storage.js"></script>
 
-                            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoZ9vvwpXnZKRA32JSULALRH1cZrx--IM&libraries=places"
+                            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoZ9vvwpXnZKRA32JSULALRH1cZrx--IM&libraries=places&callback=initialize"
                             async defer></script>
 
                             <script src="main5.js"></script>
@@ -170,9 +170,9 @@
                          
                       <script>
                       
-                          $( document ).ready(function() {
+                          function initialize(){
                                 insertSearch("address");
-                          });
+                          }
                           
                           function updateAddress(){
                               defaultFirestore.collection('hotelAccount').doc(email).update({
