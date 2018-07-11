@@ -172,7 +172,6 @@
                       
                           $( document ).ready(function() {
                                 insertSearch("address");
-                              alert("Yes");
                           });
                           
                           function insertSearch(id){
@@ -193,7 +192,9 @@
                             var address = '';
                             if (place.address_components) {
 
-
+                                hotel_data.address = place.formatted_address;
+                                hotel_data.lat = place.geometry.location.lat();
+                                hotel_data.lng = place.geometry.location.lng();
 
                                 address = [
                                 (place.address_components[0] && place.address_components[0].short_name || ''),
