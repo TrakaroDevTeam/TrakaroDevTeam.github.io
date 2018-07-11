@@ -175,6 +175,15 @@
                           }
                           
                           function updateAddress(){
+                              if(hotel_data.address == null){
+                                  hotel_data.address = "";
+                              }
+                              if(hotel_data.lat == null){
+                                  hotel_data.lat = "";
+                              }
+                              if(hotel_data.lng == null){
+                                  hotel_data.lng = "";
+                              }
                               defaultFirestore.collection('hotelAccount').doc(email).update({
                                  address: hotel_data.address,
                                  lat: hotel_data.lat,
