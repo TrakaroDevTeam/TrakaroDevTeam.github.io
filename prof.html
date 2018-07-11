@@ -168,6 +168,41 @@
                                 <img style="height: 14vw; width: 21vw; margin:0.5vw" src="2.jpg">
                          </a>-->
                          
+                      <script>
+                      
+                          insertSearch("address");
+                          
+                          function insertSearch(id){
+
+                            var input = document.getElementById(id);
+
+                            var autocomplete = new google.maps.places.Autocomplete(input);
+
+                            autocomplete.addListener('place_changed', function() {
+                            var place = autocomplete.getPlace();
+                            if (!place.geometry) {
+                                // User entered the name of a Place that was not suggested and
+                                // pressed the Enter key, or the Place Details request failed.
+                                window.alert("No details available for input: '" + place.name + "'");
+                                return;
+                            }
+
+                            var address = '';
+                            if (place.address_components) {
+
+
+
+                                address = [
+                                (place.address_components[0] && place.address_components[0].short_name || ''),
+                                (place.address_components[1] && place.address_components[1].short_name || ''),
+                                (place.address_components[2] && place.address_components[2].short_name || '')
+                                ].join(' ');
+                            }
+                            });
+                        }
+                      
+                      </script>
+                      
                          <div style="clear:both; margin-left: 38.7vw; margin-top: 10vw">
                                 <button type="button" class="btn btn-success bg-tertiarygreen text-green font2" style="float:left; border-radius: 2vw; padding: 0.4vw 4vw 0.4vw 4vw; margin-right: 1.4vw;" onclick="discard()">Discard</button>
                                 <button type="button" class="btn btn-warning bg-secondary2 text-white font2" style="border-radius: 2vw; padding: 0.4vw 5vw 0.4vw 5vw" onclick="save()">Save</button>
