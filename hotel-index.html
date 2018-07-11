@@ -114,6 +114,11 @@
                                             </div> 
         
                                             <script>
+                                                    function saveGallery(){
+                                                        var email = document.getElementById("email").value;
+                                                        defaultFirestore.collection("gallery").doc(email).set({gallery_url: []});        
+                                                    }
+                                                    
                                                         $('.btn-success').click(function() {
                                                         $(this).addClass('greenactive');
                                                         $('.btn-warning').removeClass('orangeactive');
