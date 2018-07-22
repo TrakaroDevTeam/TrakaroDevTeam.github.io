@@ -556,7 +556,7 @@ you hire around the area or that you have a variety of people from different pla
                     document.getElementById("noReviews").style.display = "none";
                     // doc.data() is never undefined for query doc snapshots
                     console.log(doc.id, " => ", doc.data());
-                    document.getElementById("reviewHolder").innerHTML += '<div style="width: 31vw; margin-left:1vw; position:arelative; background-color: white">' +
+                    var myReview = '<div style="width: 31vw; margin-left:1vw; position:arelative; background-color: white">' +
                         '<img style = "margin-left: 1vw; margin-top: 1vw; border-radius: 50%; background-color:white; height: 5vw; width: 5vw;" src="kuyakim.jpg" alt="logo">' +
                         '<p style="position:absolute; margin-left: 7vw; margin-top: -3vw;"><b>...</b></p>' + 
                         '<p style="position:absolute; margin-left: 22vw; margin-top: -4vw;">1</p>' +
@@ -568,7 +568,7 @@ you hire around the area or that you have a variety of people from different pla
                     var rating = parseInt(doc.data().review_stars + "");
                     switch(rating){
                         case 0:
-                            document.getElementById("reviewHolder").innerHTML += '<div style="position:absolute; margin-left: 23vw; margin-top: -2vw;">' +
+                            myReview += '<div style="position:absolute; margin-left: 23vw; margin-top: -2vw;">' +
                                 '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
@@ -577,7 +577,7 @@ you hire around the area or that you have a variety of people from different pla
                             '</div>';
                             break;
                         case 1: 
-                            document.getElementById("reviewHolder").innerHTML += '<div style="position:absolute; margin-left: 23vw; margin-top: -2vw;">' +
+                            myReview += '<div style="position:absolute; margin-left: 23vw; margin-top: -2vw;">' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
@@ -586,7 +586,7 @@ you hire around the area or that you have a variety of people from different pla
                             '</div>';
                             break;
                         case 2:
-                            document.getElementById("reviewHolder").innerHTML += '<div style="position:absolute; margin-left: 23vw; margin-top: -2vw;">' +
+                            myReview += '<div style="position:absolute; margin-left: 23vw; margin-top: -2vw;">' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
@@ -595,7 +595,7 @@ you hire around the area or that you have a variety of people from different pla
                             '</div>';
                             break;
                         case 3:
-                            document.getElementById("reviewHolder").innerHTML += '<div style="position:absolute; margin-left: 23vw; margin-top: -2vw;">' +
+                            myReview += '<div style="position:absolute; margin-left: 23vw; margin-top: -2vw;">' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
@@ -604,7 +604,7 @@ you hire around the area or that you have a variety of people from different pla
                             '</div>';
                             break;
                         case 4:
-                            document.getElementById("reviewHolder").innerHTML += '<div style="position:absolute; margin-left: 23vw; margin-top: -2vw;">' +
+                            myReview += '<div style="position:absolute; margin-left: 23vw; margin-top: -2vw;">' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
@@ -613,7 +613,7 @@ you hire around the area or that you have a variety of people from different pla
                             '</div>';
                             break;
                         case 5:
-                            document.getElementById("reviewHolder").innerHTML += '<div style="position:absolute; margin-left: 23vw; margin-top: -2vw;">' +
+                            myReview += '<div style="position:absolute; margin-left: 23vw; margin-top: -2vw;">' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
@@ -622,8 +622,8 @@ you hire around the area or that you have a variety of people from different pla
                             '</div>';
                             break;
                     }
-                    
-                    document.getElementById("reviewHolder").innerHTML += '<p style="position:absolute; margin-left: 1.5vw; margin-top: 1vw; font-size: 1vw;"><b>' + doc.data().review_title + '</b></p>' +
+
+                    document.getElementById("reviewHolder").innerHTML += myReview + '<p style="position:absolute; margin-left: 1.5vw; margin-top: 1vw; font-size: 1vw;"><b>' + doc.data().review_title + '</b></p>' +
                         '<p style="margin-left: 1.5vw; margin-top: 3vw; font-size: 1vw;">' + doc.data().review_body + '</p>'+
                         '<br>'+
                     '</div><br>';
