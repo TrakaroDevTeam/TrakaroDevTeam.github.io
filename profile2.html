@@ -270,7 +270,7 @@
                         </div>
                     </div>
               <div style=" height: 100vw; position:absolute; right: 0; top: 0; width: 72vw;">
-                  <img id="cover_photo" src="coverPhoto.png" style="object-fit: cover; width:75vw; height: 50vw; margin-left: -1.5vw; margin-top: -10vw;">
+                  <img id="cover_photo" src="CoverPhoto.png" style="object-fit: cover; width:75vw; height: 50vw; margin-left: -1.5vw; margin-top: -10vw;">
                   <div class="dropdown" style="left: 58vw; top: 1vw; width: 10vw;">
                         <i data-toggle="dropdown" style="font-size: 3vw; color:#999; margin-left: 7vw; " class="fa fa-gear cursor"></i>
                         <ul class="dropdown-menu">
@@ -447,9 +447,9 @@ you hire around the area or that you have a variety of people from different pla
                                             <span style="font-size: 2vw;" class="fa fa-star"></span>
                                             <p>0 review</p>
                                         </div>
-                                        <div style="margin-left: 20vw; margin-top: -0.5vw;">
-                                                <p id="customer_rating" align="center" style="font-size:2vw;"><b>No</b></p>
-                                                <p align="center" style="margin-top: -1vw;" class="card-text">Customer Rating</p>
+                                        <div id="starsRating2" style="margin-left: 20vw; margin-top: -0.5vw;">
+                                            <p id="customer_rating" align="center" style="font-size:2vw;"><b>No</b></p>
+                                            <p align="center" style="margin-top: -1vw;" class="card-text">Customer Rating</p>
                                         </div>
                                         <br>
                                         <hr>
@@ -739,9 +739,11 @@ you hire around the area or that you have a variety of people from different pla
                             '<span style="font-size: 2vw;" class="fa fa-star checked"></span>';
                     }
                     
-                    customerString += '<p>' + (counter) + (counter <= 1 ? "review" : "reviews") + '</p>';
+                    customerString += '<p>' + (counter) + (counter <= 1 ? " review" : " reviews") + '</p>';
 
                     document.getElementById("starsRating").innerHTML = customerString;
+                    document.getElementById("starsRating2").innerHTML = '<p id="customer_rating" align="center" style="font-size:2vw;"><b>' + totalScore/5 + '</b></p>' +
+                    '<p align="center" style="margin-top: -1vw;" class="card-text">Customer Rating</p>';
                 }   
 
             }).catch(function(error) {
