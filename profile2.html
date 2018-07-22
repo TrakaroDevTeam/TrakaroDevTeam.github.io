@@ -455,8 +455,6 @@ you hire around the area or that you have a variety of people from different pla
                                         <hr>
                                         <br><br>
                                     </div>
-                                    <script>
-                                    </script>
                                     <div id="reviews" class="review" style="height: 30vw; width: 35vw; margin-left: 35vw; margin-top: 2vw; position:absolute; background-color: #f2f2f2">
                                         <p style="margin-left:1vw; margin-top: 1vw;" class="card-text"><b>Reviews</b></p>
                                          <p id="noReviews" style="margin-left:1vw; margin-top: 1vw;" class="card-text"><b>No Reviews yet</b></p>
@@ -552,19 +550,23 @@ you hire around the area or that you have a variety of people from different pla
             var documentReference = defaultFirestore.collection("reviews").where("hotelId", "==", sessionStorage.getItem("email"));
 
             documentReference.get().then(function(querySnapshot) {
+                var counter = 0;
                 querySnapshot.forEach(function(doc) {
+                    counter++;
                     document.getElementById("noReviews").style.display = "none";
                     // doc.data() is never undefined for query doc snapshots
                     console.log(doc.id, " => ", doc.data());
                     var myReview = '<div style="width: 31vw; margin-left:1vw; position:arelative; background-color: white">' +
-                        '<img style = "margin-left: 1vw; margin-top: 1vw; border-radius: 50%; background-color:white; height: 5vw; width: 5vw;" src="kuyakim.jpg" alt="logo">' +
-                        '<p style="position:absolute; margin-left: 7vw; margin-top: -3vw;"><b>...</b></p>' + 
-                        '<p style="position:absolute; margin-left: 22vw; margin-top: -4vw;">1</p>' +
-                        '<p style="position:absolute; margin-left: 26vw; margin-top: -4vw;">0</p>' +
+                        '<img id="userImage' + counter + '" style = "margin-left: 1vw; margin-top: 1vw; border-radius: 50%; background-color:white; height: 5vw; width: 5vw;" alt="logo">' +
+                        '<p style="position:absolute; margin-left: 7vw; margin-top: -3vw;"><b id="userName' + counter + '">...</b></p>' + 
+                        '<p style="position:absolute; margin-left: 22vw; margin-top: -4vw;">' + doc.data().rateUp.size() + '</p>' +
+                        '<p style="position:absolute; margin-left: 26vw; margin-top: -4vw;">' + doc.data().rateDown.size() + '</p>' +
                         '<img style = "position: absolute; margin-left: 17vw; margin-top: 2vw; background-color:white; height: 1.5vw; width: 1.5vw;" src="smile1.png" alt="logo">' +
                         '<img style = "position: absolute; margin-left: 21vw; margin-top: 2vw; background-color:white; height: 1.5vw; width: 1.5vw;" src="frown1.png" alt="logo">' +
                         '<p style="position:absolute; margin-left: 17.5vw; margin-top: -1.8vw; font-size: 0.8vw;">June 26 2018</p>';
                     
+                    loadUserDetails(counter, doc.data().userId);
+
                     var rating = parseInt(doc.data().review_stars + "");
                     switch(rating){
                         case 0:
@@ -628,6 +630,15 @@ you hire around the area or that you have a variety of people from different pla
                         '<br>'+
                     '</div><br>';
                 });
+            }).catch(function(error) {
+                console.log("Error getting documents: ", error);
+            });
+        }
+
+        function loadUserDetails(number, email){
+            defaultFirestore.collection("userAccount").doc(email).get().then(function(document){
+                document.getElementById("userName" + number).innerText = document.data().name;
+                document.getElementById("userImage" + number).src = document.data().pic_url;
             }).catch(function(error) {
                 console.log("Error getting documents: ", error);
             });
