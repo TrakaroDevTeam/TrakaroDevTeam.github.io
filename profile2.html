@@ -564,7 +564,9 @@ you hire around the area or that you have a variety of people from different pla
 
                     var review_date = doc.data().review_time;
 
-                        console.log(review_date);
+                        var d = new Date(); 
+                        d.setTime(review_date.seconds);
+                        console.log(d);
 
                         myReview += '<p style="position:absolute; margin-left: 17.5vw; margin-top: -1.8vw; font-size: 0.8vw;">June 26 2018</p>';
                     
