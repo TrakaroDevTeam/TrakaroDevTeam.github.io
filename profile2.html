@@ -563,15 +563,67 @@ you hire around the area or that you have a variety of people from different pla
                         '<p style="position:absolute; margin-left: 26vw; margin-top: -4vw;">0</p>' +
                         '<img style = "position: absolute; margin-left: 17vw; margin-top: 2vw; background-color:white; height: 1.5vw; width: 1.5vw;" src="smile1.png" alt="logo">' +
                         '<img style = "position: absolute; margin-left: 21vw; margin-top: 2vw; background-color:white; height: 1.5vw; width: 1.5vw;" src="frown1.png" alt="logo">' +
-                        '<p style="position:absolute; margin-left: 17.5vw; margin-top: -1.8vw; font-size: 0.8vw;">June 26 2018</p>' +
-                        '<div style="position:absolute; margin-left: 23vw; margin-top: -2vw;">' +
+                        '<p style="position:absolute; margin-left: 17.5vw; margin-top: -1.8vw; font-size: 0.8vw;">June 26 2018</p>';
+                    
+                    var rating = parseInt(doc.data().review_stars + "");
+                    switch(rating){
+                        case 0:
+                            document.getElementById("reviewHolder").innerHTML += '<div style="position:absolute; margin-left: 23vw; margin-top: -2vw;">' +
+                                '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
+                                '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
+                                '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
+                                '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
+                                '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
+                            '</div>';
+                            break;
+                        case 1: 
+                            document.getElementById("reviewHolder").innerHTML += '<div style="position:absolute; margin-left: 23vw; margin-top: -2vw;">' +
+                                '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
+                                '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
+                                '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
+                                '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
+                                '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
+                            '</div>';
+                            break;
+                        case 2:
+                            document.getElementById("reviewHolder").innerHTML += '<div style="position:absolute; margin-left: 23vw; margin-top: -2vw;">' +
+                                '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
+                                '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
+                                '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
+                                '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
+                                '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
+                            '</div>';
+                            break;
+                        case 3:
+                            document.getElementById("reviewHolder").innerHTML += '<div style="position:absolute; margin-left: 23vw; margin-top: -2vw;">' +
+                                '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
+                                '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
+                                '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
+                                '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
+                                '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
+                            '</div>';
+                            break;
+                        case 4:
+                            document.getElementById("reviewHolder").innerHTML += '<div style="position:absolute; margin-left: 23vw; margin-top: -2vw;">' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
-                            '</div>' +
-                        '<p style="position:absolute; margin-left: 1.5vw; margin-top: 1vw; font-size: 1vw;"><b>' + doc.data().review_title + '</b></p>' +
+                            '</div>';
+                            break;
+                        case 5:
+                            document.getElementById("reviewHolder").innerHTML += '<div style="position:absolute; margin-left: 23vw; margin-top: -2vw;">' +
+                                '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
+                                '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
+                                '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
+                                '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
+                                '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
+                            '</div>';
+                            break;
+                    }
+                    
+                    document.getElementById("reviewHolder").innerHTML += '<p style="position:absolute; margin-left: 1.5vw; margin-top: 1vw; font-size: 1vw;"><b>' + doc.data().review_title + '</b></p>' +
                         '<p style="margin-left: 1.5vw; margin-top: 3vw; font-size: 1vw;">' + doc.data().review_body + '</p>'+
                         '<br>'+
                     '</div><br>';
