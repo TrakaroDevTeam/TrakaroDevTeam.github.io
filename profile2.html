@@ -554,8 +554,6 @@ you hire around the area or that you have a variety of people from different pla
                 querySnapshot.forEach(function(doc) {
                     counter++;
                     document.getElementById("noReviews").style.display = "none";
-                    // doc.data() is never undefined for query doc snapshots
-                    console.log(doc.id, " => ", doc.data());
                     var myReview = '<div style="width: 31vw; margin-left:1vw; position:arelative; background-color: white">' +
                         '<img id="userImage' + counter + '" style = "margin-left: 1vw; margin-top: 1vw; border-radius: 50%; background-color:white; height: 5vw; width: 5vw;" alt="logo">' +
                         '<p style="position:absolute; margin-left: 7vw; margin-top: -3vw;"><b id="userName' + counter + '">...</b></p>' + 
@@ -564,7 +562,7 @@ you hire around the area or that you have a variety of people from different pla
                         '<img style = "position: absolute; margin-left: 17vw; margin-top: 2vw; background-color:white; height: 1.5vw; width: 1.5vw;" src="smile1.png" alt="logo">' +
                         '<img style = "position: absolute; margin-left: 21vw; margin-top: 2vw; background-color:white; height: 1.5vw; width: 1.5vw;" src="frown1.png" alt="logo">';
 
-                    var review_date = Date.parse(doc.data().review_time + "");
+                    var review_date = doc.data().review_time;
 
                         console.log(review_date);
 
