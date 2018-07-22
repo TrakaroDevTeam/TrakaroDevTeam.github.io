@@ -547,6 +547,8 @@ you hire around the area or that you have a variety of people from different pla
         function loadReviews(){
             const firestore1 = firebase.firestore();
 
+            var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
             var documentReference = defaultFirestore.collection("reviews").where("hotelId", "==", sessionStorage.getItem("email")).orderBy("review_time", "desc");
 
             documentReference.get().then(function(querySnapshot) {
@@ -573,14 +575,14 @@ you hire around the area or that you have a variety of people from different pla
                         var yyyy = d.getFullYear();
 
                         if(dd<10) {
-                            dd = '0'+dd
+                            dd = '0'+dd;
                         } 
 
                         if(mm<10) {
-                            mm = '0'+mm
+                            mm = months[mm-1];
                         } 
 
-                        d = mm + '/' + dd + '/' + yyyy;
+                        d = mm + " " + dd + ', ' + yyyy;
 
                         myReview += '<p style="position:absolute; margin-left: 17.5vw; margin-top: -1.8vw; font-size: 0.8vw;">' + d + '</p>';
                     
