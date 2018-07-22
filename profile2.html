@@ -552,7 +552,6 @@ you hire around the area or that you have a variety of people from different pla
 
             documentReference.get().then(function(querySnapshot) {
                 querySnapshot.forEach(function(doc) {
-                    document.getElementById("noReviews").style.display = "hidden";
                     console.log(doc.id, " => ", doc.data());
                     document.getElementById("reviewHolder").innerHTML += '<div style="width: 31vw; margin-left:1vw; position:arelative; background-color: white">' +
                         '<img style = "margin-left: 1vw; margin-top: 1vw; border-radius: 50%; background-color:white; height: 5vw; width: 5vw;" src="kuyakim.jpg" alt="logo">' +
