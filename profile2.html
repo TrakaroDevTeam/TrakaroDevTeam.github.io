@@ -638,7 +638,11 @@ you hire around the area or that you have a variety of people from different pla
         function loadUserDetails(number, email){
             defaultFirestore.collection("userAccount").doc(email).get().then(function(mes){
                 document.getElementById("userName" + number).innerText = mes.data().name;
-                document.getElementById("userImage" + number).src = mes.data().pic_url;
+                if(mes.data().pic_url == "" || mes.data() == null){
+                    document.getElementById("userImage" + number).src = "https://trakaro.com/piclogo1.png";
+                } else {
+                    document.getElementById("userImage" + number).src = mes.data().pic_url;
+                }
             }).catch(function(error) {
                 console.log("Error getting documents: ", error);
             });
