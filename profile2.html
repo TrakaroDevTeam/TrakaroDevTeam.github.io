@@ -568,7 +568,21 @@ you hire around the area or that you have a variety of people from different pla
                         d.setTime(review_date.seconds * 1000);
                         console.log(d);
 
-                        myReview += '<p style="position:absolute; margin-left: 17.5vw; margin-top: -1.8vw; font-size: 0.8vw;">' + d.getDate() + '</p>';
+                        var dd = d.getDate();
+                        var mm = d.getMonth()+1; //January is 0!
+                        var yyyy = d.getFullYear();
+
+                        if(dd<10) {
+                            dd = '0'+dd
+                        } 
+
+                        if(mm<10) {
+                            mm = '0'+mm
+                        } 
+
+                        d = mm + '/' + dd + '/' + yyyy;
+
+                        myReview += '<p style="position:absolute; margin-left: 17.5vw; margin-top: -1.8vw; font-size: 0.8vw;">' + d + '</p>';
                     
                     loadUserDetails(counter, doc.data().userId);
 
