@@ -399,43 +399,43 @@ you hire around the area or that you have a variety of people from different pla
                                         <hr>
                                     <div style="height: 20vw; width: 30vw; margin-left: 1vw; margin-top: 2vw; position:absolute;">
                                         <p style="margin-left:10vw; margin-top: 1vw;" class="card-text"><b>Customer Ratings</b></p>
-                                        <p style="margin-left: 31vw; position: absolute;">0</p>
+                                        <p id="excellentIdNum" style="margin-left: 31vw; position: absolute;">0</p>
                                         <p>Excellent</p>
                                         <div style="margin-left: 6vw; margin-top: -2.3vw;">
                                             <div class="progress">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:0%; background-color:#ED7D31;">
+                                                <div id="excellentId" class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:0%; background-color:#ED7D31;">
                                                 </div>
                                             </div>
                                         </div>
-                                        <p style="margin-left: 31vw; position: absolute;">0</p>
+                                        <p id="veryGoodIdNum" style="margin-left: 31vw; position: absolute;">0</p>
                                         <p>Very Good</p>
                                         <div style="margin-left: 6vw; margin-top: -2.3vw;">
                                             <div class="progress">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:0%; background-color:#ED7D31;">
+                                                <div id="veryGoodId" class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:0%; background-color:#ED7D31;">
                                                 </div>
                                             </div>
                                         </div>  
-                                        <p style="margin-left: 31vw; position: absolute;">0</p>
+                                        <p id="averageIdNum" style="margin-left: 31vw; position: absolute;">0</p>
                                         <p>Average</p>
                                         <div style="margin-left: 6vw; margin-top: -2.3vw;">
                                             <div class="progress">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:0%; background-color:#ED7D31;">
+                                                <div id="averageId" class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:0%; background-color:#ED7D31;">
                                                 </div>
                                             </div>
                                         </div>  
-                                        <p style="margin-left: 31vw; position: absolute;">0</p>
+                                        <p id="poorIdNum" style="margin-left: 31vw; position: absolute;">0</p>
                                         <p>Poor</p>
                                         <div style="margin-left: 6vw; margin-top: -2.3vw;">
                                             <div class="progress">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:0%; background-color:#ED7D31;">
+                                                <div id="poorId" class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:0%; background-color:#ED7D31;">
                                                 </div>
                                             </div>
                                         </div> 
-                                        <p style="margin-left: 31vw; position: absolute;">0</p>
+                                        <p id="terribleIdNum" style="margin-left: 31vw; position: absolute;">0</p>
                                         <p>Terrible</p>
                                         <div style="margin-left: 6vw; margin-top: -2.3vw;">
                                             <div class="progress">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:0%; background-color:#ED7D31;">
+                                                <div id="terribleId" class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:0%; background-color:#ED7D31;">
                                                 </div>
                                             </div>
                                         </div> 
@@ -553,6 +553,7 @@ you hire around the area or that you have a variety of people from different pla
 
             documentReference.get().then(function(querySnapshot) {
                 var counter = 0;
+                var rates = [0,0,0,0,0];
                 querySnapshot.forEach(function(doc) {
                     counter++;
                     document.getElementById("noReviews").style.display = "none";
@@ -588,6 +589,7 @@ you hire around the area or that you have a variety of people from different pla
                     loadUserDetails(counter, doc.data().userId);
 
                     var rating = parseInt(doc.data().review_stars + "");
+                    rates[review_stars-1]++;
                     switch(rating){
                         case 0:
                             myReview += '<div style="position:absolute; right: 4vw; margin-top: -1vw;">' +
@@ -650,6 +652,19 @@ you hire around the area or that you have a variety of people from different pla
                         '<br>'+
                     '</div><br>';
                 });
+
+                document.getElementById("terribleId").style.width = (rates[0]/counter) + "%";
+                document.getElementById("poorId").style.width = (rates[1]/counter) + "%";
+                document.getElementById("averageId").style.width = (rates[2]/counter) + "%";
+                document.getElementById("veryGoodId").style.width = (rates[3]/counter) + "%";
+                document.getElementById("excellentId").style.width = (rates[4]/counter) + "%";
+
+                document.getElementById("terribleIdNum").innerText = rates[0];
+                document.getElementById("poorIdNum").innerText = rates[1];
+                document.getElementById("averageIdNum").innerText = rates[2];
+                document.getElementById("veryGoodIdNum").innerText= rates[3];
+                document.getElementById("excellentIdNum").innerText = rates[4];
+
             }).catch(function(error) {
                 console.log("Error getting documents: ", error);
             });
