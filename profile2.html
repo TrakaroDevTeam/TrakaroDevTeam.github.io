@@ -589,7 +589,7 @@ you hire around the area or that you have a variety of people from different pla
                     loadUserDetails(counter, doc.data().userId);
 
                     var rating = parseInt(doc.data().review_stars + "");
-                    rates[review_stars-1]++;
+                    rates[rating-1]++;
                     switch(rating){
                         case 0:
                             myReview += '<div style="position:absolute; right: 4vw; margin-top: -1vw;">' +
