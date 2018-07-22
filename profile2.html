@@ -568,7 +568,6 @@ you hire around the area or that you have a variety of people from different pla
 
                         var d = new Date(); 
                         d.setTime(review_date.seconds * 1000);
-                        console.log(d);
 
                         var dd = d.getDate();
                         var mm = d.getMonth()+1; //January is 0!
@@ -584,14 +583,14 @@ you hire around the area or that you have a variety of people from different pla
 
                         d = mm + " " + dd + ', ' + yyyy;
 
-                        myReview += '<p style="position:absolute; margin-left: 17.5vw; margin-top: -1.8vw; font-size: 0.8vw;">' + d + '</p>';
+                        myReview += '<p style="position:absolute; right: 10vw; margin-top: -1vw; font-size: 0.8vw;">' + d + '</p>';
                     
                     loadUserDetails(counter, doc.data().userId);
 
                     var rating = parseInt(doc.data().review_stars + "");
                     switch(rating){
                         case 0:
-                            myReview += '<div style="position:absolute; margin-left: 23vw; margin-top: -2vw;">' +
+                            myReview += '<div style="position:absolute; right: 4vw; margin-top: -2vw;">' +
                                 '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
@@ -600,7 +599,7 @@ you hire around the area or that you have a variety of people from different pla
                             '</div>';
                             break;
                         case 1: 
-                            myReview += '<div style="position:absolute; margin-left: 23vw; margin-top: -2vw;">' +
+                            myReview += '<div style="position:absolute; right: 4vw; margin-top: -2vw;">' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
@@ -609,7 +608,7 @@ you hire around the area or that you have a variety of people from different pla
                             '</div>';
                             break;
                         case 2:
-                            myReview += '<div style="position:absolute; margin-left: 23vw; margin-top: -2vw;">' +
+                            myReview += '<div style="position:absolute; right: 4vw; margin-top: -2vw;">' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star"></span>' +
@@ -618,7 +617,7 @@ you hire around the area or that you have a variety of people from different pla
                             '</div>';
                             break;
                         case 3:
-                            myReview += '<div style="position:absolute; margin-left: 23vw; margin-top: -2vw;">' +
+                            myReview += '<div style="position:absolute; right: 4vw; margin-top: -2vw;">' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
@@ -627,7 +626,7 @@ you hire around the area or that you have a variety of people from different pla
                             '</div>';
                             break;
                         case 4:
-                            myReview += '<div style="position:absolute; margin-left: 23vw; margin-top: -2vw;">' +
+                            myReview += '<div style="position:absolute; right: 4vw; margin-top: -2vw;">' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
@@ -636,7 +635,7 @@ you hire around the area or that you have a variety of people from different pla
                             '</div>';
                             break;
                         case 5:
-                            myReview += '<div style="position:absolute; margin-left: 23vw; margin-top: -2vw;">' +
+                            myReview += '<div style="position:absolute; right: 4vw; margin-top: -2vw;">' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
                                 '<span style="font-size: 1vw;" class="fa fa-star checked"></span>' +
