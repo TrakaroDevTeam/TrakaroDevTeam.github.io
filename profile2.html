@@ -439,16 +439,16 @@ you hire around the area or that you have a variety of people from different pla
                                                 </div>
                                             </div>
                                         </div> 
-                                        <div style="position:absolute; margin-top: 1vw;">
-                                                <span style="font-size: 2vw;" class="fa fa-star"></span>
-                                                <span style="font-size: 2vw;" class="fa fa-star"></span>
-                                                <span style="font-size: 2vw;" class="fa fa-star"></span>
-                                                <span style="font-size: 2vw;" class="fa fa-star"></span>
-                                                <span style="font-size: 2vw;" class="fa fa-star"></span>
-                                                <p id = "review">0 review</p>
+                                        <div id="starsRating" style="position:absolute; margin-top: 1vw;">
+                                            <span style="font-size: 2vw;" class="fa fa-star"></span>
+                                            <span style="font-size: 2vw;" class="fa fa-star"></span>
+                                            <span style="font-size: 2vw;" class="fa fa-star"></span>
+                                            <span style="font-size: 2vw;" class="fa fa-star"></span>
+                                            <span style="font-size: 2vw;" class="fa fa-star"></span>
+                                            <p>0 review</p>
                                         </div>
                                         <div style="margin-left: 20vw; margin-top: -0.5vw;">
-                                                <p id = "customer_rating" align="center" style="font-size:2vw;"><b>No</b></p>
+                                                <p id="customer_rating" align="center" style="font-size:2vw;"><b>No</b></p>
                                                 <p align="center" style="margin-top: -1vw;" class="card-text">Customer Rating</p>
                                         </div>
                                         <br>
@@ -554,6 +554,7 @@ you hire around the area or that you have a variety of people from different pla
             documentReference.get().then(function(querySnapshot) {
                 var counter = 0;
                 var rates = [0,0,0,0,0];
+                var total = 0;
                 querySnapshot.forEach(function(doc) {
                     counter++;
                     document.getElementById("noReviews").style.display = "none";
@@ -589,6 +590,7 @@ you hire around the area or that you have a variety of people from different pla
                     loadUserDetails(counter, doc.data().userId);
 
                     var rating = parseInt(doc.data().review_stars + "");
+                    total += rating;
                     rates[rating-1]++;
                     switch(rating){
                         case 0:
@@ -653,17 +655,94 @@ you hire around the area or that you have a variety of people from different pla
                     '</div><br>';
                 });
 
-                document.getElementById("terribleId").style.width = (rates[0]/counter) + "%";
-                document.getElementById("poorId").style.width = (rates[1]/counter) + "%";
-                document.getElementById("averageId").style.width = (rates[2]/counter) + "%";
-                document.getElementById("veryGoodId").style.width = (rates[3]/counter) + "%";
-                document.getElementById("excellentId").style.width = (rates[4]/counter) + "%";
+                if(counter > 0){
+                    document.getElementById("terribleId").style.width = ((rates[0]/counter)*100) + "%";
+                    document.getElementById("poorId").style.width = ((rates[1]/counter)*100) + "%";
+                    document.getElementById("averageId").style.width = ((rates[2]/counter)*100) + "%";
+                    document.getElementById("veryGoodId").style.width = ((rates[3]/counter)*100) + "%";
+                    document.getElementById("excellentId").style.width = ((rates[4]/counter)*100) + "%";
 
-                document.getElementById("terribleIdNum").innerText = rates[0];
-                document.getElementById("poorIdNum").innerText = rates[1];
-                document.getElementById("averageIdNum").innerText = rates[2];
-                document.getElementById("veryGoodIdNum").innerText= rates[3];
-                document.getElementById("excellentIdNum").innerText = rates[4];
+                    document.getElementById("terribleIdNum").innerText = rates[0];
+                    document.getElementById("poorIdNum").innerText = rates[1];
+                    document.getElementById("averageIdNum").innerText = rates[2];
+                    document.getElementById("veryGoodIdNum").innerText= rates[3];
+                    document.getElementById("excellentIdNum").innerText = rates[4];
+
+                    var customerString = "";
+                    
+                    var totalScore = total/counter;
+                    if(totalScore < 0.25){
+                        customerString += '<span style="font-size: 2vw;" class="fa fa-star"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star"></span>';
+                    } else if(totalScore < 0.75){
+                        customerString += '<span style="font-size: 2vw;" class="fa fa-star-half-full"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star"></span>';
+                    } else if(totalScore < 1.25){
+                        customerString += '<span style="font-size: 2vw;" class="fa fa-star checked"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star"></span>';
+                    } else if(totalScore < 1.75){
+                        customerString += '<span style="font-size: 2vw;" class="fa fa-star checked"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star-half-full"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star"></span>';
+                    } else if(totalScore < 2.25){
+                        customerString += '<span style="font-size: 2vw;" class="fa fa-star checked"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star checked"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star"></span>';
+                    } else if(totalScore < 2.75){
+                        customerString += '<span style="font-size: 2vw;" class="fa fa-star checked"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star checked"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star-half-full"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star"></span>';
+                    } else if(totalScore < 3.25){
+                        customerString += '<span style="font-size: 2vw;" class="fa fa-star checked"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star checked"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star checked"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star"></span>';
+                    } else if(totalScore < 3.75){
+                        customerString += '<span style="font-size: 2vw;" class="fa fa-star checked"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star checked"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star checked"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star-half-full"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star"></span>';
+                    } else if(totalScore < 4.25){
+                        customerString += '<span style="font-size: 2vw;" class="fa fa-star checked"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star checked"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star checked"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star checked"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star"></span>';
+                    } else if(totalScore < 4.75){
+                        customerString += '<span style="font-size: 2vw;" class="fa fa-star checked"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star checked"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star checked"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star checked"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star-half-full"></span>';
+                    } else if(totalScore <= 5){
+                        customerString += '<span style="font-size: 2vw;" class="fa fa-star checked"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star checked"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star checked"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star checked"></span>' +
+                            '<span style="font-size: 2vw;" class="fa fa-star checked"></span>';
+                    }
+                    
+                    customerString += '<p>' + (counter) + (counter <= 1 ? "review" : "reviews") + '</p>';
+
+                    document.getElementById("starsRating").innerHTML = customerString;
+                }   
 
             }).catch(function(error) {
                 console.log("Error getting documents: ", error);
