@@ -592,17 +592,17 @@ you hire around the area or that you have a variety of people from different pla
                                             let dist = d;
                                             let distKm = dist/1000;
 
-                                                    if(distKm <= 2.5){
+                                                    if(distKm <= 20){
                                                 totalFoodSource += 10;
-                                            }else if(distKm <= 10){
+                                            }else if(distKm <= 80){
                                                 totalFoodSource += 9;
-                                            }else if(distKm <= 50){
+                                            }else if(distKm <= 160){
                                                     totalFoodSource += 7;
-                                            }else if(distKm <= 200){
-                                                totalFoodSource += 6;
-                                            }else if(distKm <= 1000){
-                                                totalFoodSource += 4;
+                                            }else if(distKm <= 450){
+                                                totalFoodSource += 5;
                                             }else if(distKm <= 5000){
+                                                totalFoodSource += 3;
+                                            }else {
                                                 totalFoodSource += 1;
                                             }
                                                 }
@@ -618,11 +618,58 @@ you hire around the area or that you have a variety of people from different pla
                                                 var manpower = 0;
                                                 if (doc.exists) {
                                                     var country = doc.data().country;
-                                                    console.log(country);
+                                                    var count = 0;
+                                                    var totalManpower = 0;
+                                                    for (var property in country) {
+                                                    if (country.hasOwnProperty(property)) {
+                                                        var datas = country.property.data;
+                                                                for(var i=0; i<datas.length; i++){
+                                                                    count += datas[i].residents;
+
+                                                                    var lat1 = datas[i].lat;
+                                                                    var lng1 = datas[i].lng;
+                                                            /*Haversine : 2 r arcsin sqrt( sin^2((lat2 - lat1)/2) + cos(lat1) cos(lat2) sin^2((lng2 - lng1)/2) ) in km
+                                                            *  r = radius of the earth : 6371km
+                                                            */
+                                                            var R = 6371e3; // metres
+                                                            var a1 = angToRad(parseFloat(lat1));
+                                                            var a2 = angToRad(parseFloat(lat));
+                                                            var cA = angToRad(parseFloat(lat)-parseFloat(lat1));
+                                                            var cT = angToRad(parseFloat(lng)-parseFloat(lng1));
+
+                                                            var a = Math.sin(cA/2) * Math.sin(cA/2) +
+                                                                    Math.cos(a1) * Math.cos(a2) *
+                                                                    Math.sin(cT/2) * Math.sin(cT/2);
+                                                            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+                                                            var d = R * c;
+
+                                                            let dist = d;
+                                                            let distKm = dist/1000;
+
+                                                                    if(distKm <= 20){
+                                                                totalManpower += 10 * datas[i].residents;
+                                                            }else if(distKm <= 80){
+                                                                totalManpower += 9 * datas[i].residents;
+                                                            }else if(distKm <= 160){
+                                                                    totalManpower += 7 * datas[i].residents;
+                                                            }else if(distKm <= 450){
+                                                                totalManpower += 5 * datas[i].residents;
+                                                            }else if(distKm <= 5000){
+                                                                totalManpower += 3 * datas[i].residents;
+                                                            }else {
+                                                                totalManpower += 1 * datas[i].residents;
+                                                            }
+                                                                }
+                                                     }
+                                                    }
+                                                    if(count == 0){
+                                                        manpower = 0;
+                                                    } else {
+                                                        manpower = totalManpower/count;
+                                                    }
+                                                    console.log(manpower);
                                                 }
-
-
-
                                             }).catch(function(error) {
                                             console.log("Error getting documents: ", error);
                                         });
