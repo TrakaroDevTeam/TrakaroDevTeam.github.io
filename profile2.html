@@ -554,11 +554,22 @@ you hire around the area or that you have a variety of people from different pla
                                     count++;
                                                 totalStars += doc.data().review_stars;
                                 });
+
+                                        var customer_rating = 0;
+
                                         if(count == 0){
-                                            console.log("No customer rating");
+                                            customer_rating = 0;
                                         } else {
-                                            console.log("Fylla rating: " + totalStars/count);
+                                            customer_rating = totalStars/count;
                                         }
+
+                                        //Get Food foodSource -> foodsource/(email)/foods
+                                        defaultFirestore.collection('foodsource').doc(email).get().then(function(doc) {
+                                                var foods = doc.data().foods;
+                                                console.log(foods);
+                                        }).catch(function(error) {
+                                        console.log("Error getting documents: ", error);
+                                    });
                             })
                             .catch(function(error) {
                                 console.log("Error getting documents: ", error);
