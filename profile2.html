@@ -756,6 +756,7 @@ you hire around the area or that you have a variety of people from different pla
                     if(doc.data().live){
                         documnet.getElementById('liveBtn').checked = "true";
                         document.getElementById('liveBtn').parentElement.className = "toggle btn ios btn-primary";
+                        console.log(document.getElementById('liveBtn').parentElement);
                     }
                 }
             }).catch(function(error) {
