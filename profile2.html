@@ -214,7 +214,7 @@
                 <div class="container-fluid">
                     <div class="navbar-header" style="margin: 0.6vw; margin-left:-0.1vw">
                         <img class="img-circle" src="img/TrakaroIcon.png" alt="trakaroicon" style="width: 4.7vw;"> 
-                        <img src="img/trakaro.png" alt="trakaro" style="position: relative; width: 11.7vw; top: 0.3vw"> 
+                        <img src="img/trakaro.png" alt="trakaro" style="position: relative; width: 11.7vw; top: 0.3vw" onclick="computeFylla()"> 
                     </div>
                 </div>
         </nav>
@@ -534,6 +534,47 @@ you hire around the area or that you have a variety of people from different pla
 <script>
         loadReviews();
 
+        function computeFylla(){
+            var email = sessionStorage.getItem('email');
+            var lat = 0;
+            var lng = 0;
+            //Get Lat Lng -> hotelAccount/(email)
+            defaultFirestore.collection('hotelAccount').doc(email).get().then(function(doc) {
+                    if (doc.exists) {
+                            lat = doc.data().lat;
+                            lng = doc.data().lng;
+
+                            if(!(lat == null || lng == null || lat == 0 || lng == 0)){
+                                //Calculate the customer rating -> reviews/(wildcard)
+                                defaultFirestore.collection('reviews').where("hotelId", "==", email).get()
+                            .then(function(querySnapshot) {
+                                        var count = 0;
+                                        var totalStars = 0;
+                                querySnapshot.forEach(function(doc) {
+                                    count++;
+                                                totalStars += doc.data().review_stars;
+                                });
+                                        if(count == 0){
+                                            console.log("No customer rating");
+                                        } else {
+                                            console.log("Fylla rating: " + totalStars/count);
+                                        }
+                            })
+                            .catch(function(error) {
+                                console.log("Error getting documents: ", error);
+                            });
+                            } else {
+                                console.log("Please enter your address");
+                            }
+
+                    } else {
+                            console.log("Error getting documents: ", error);
+                    }
+            }).catch(function(error) {
+                    console.log("Error getting document:", error);
+            });
+        }
+    
         function openModal() {
           document.getElementById('myModal').style.display = "block";
         }
