@@ -622,12 +622,12 @@ you hire around the area or that you have a variety of people from different pla
                                                     var totalManpower = 0;
                                                     for (var property in country) {
                                                     if (country.hasOwnProperty(property)) {
-                                                        var datas = country.property.data;
-                                                                for(var i=0; i<datas.length; i++){
-                                                                    count += datas[i].residents;
+                                                        var datas = country[property].data;
+                                                        for(var i=0; i<datas.length; i++){
+                                                            count += datas[i].residents;
 
-                                                                    var lat1 = datas[i].lat;
-                                                                    var lng1 = datas[i].lng;
+                                                            var lat1 = datas[i].lat;
+                                                            var lng1 = datas[i].lng;
                                                             /*Haversine : 2 r arcsin sqrt( sin^2((lat2 - lat1)/2) + cos(lat1) cos(lat2) sin^2((lng2 - lng1)/2) ) in km
                                                             *  r = radius of the earth : 6371km
                                                             */
