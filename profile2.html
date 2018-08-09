@@ -566,7 +566,9 @@ you hire around the area or that you have a variety of people from different pla
                                         //Get Food foodSource -> foodsource/(email)/foods
                                         defaultFirestore.collection('foodsource').doc(email).get().then(function(doc) {
                                                 var foods = doc.data().foods;
-                                                console.log(foods);
+                                                for(var i=0; i<foods.length; i++){
+                                                    console.log(foods[i]);
+                                                }
                                         }).catch(function(error) {
                                         console.log("Error getting documents: ", error);
                                     });
