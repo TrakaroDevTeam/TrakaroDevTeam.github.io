@@ -536,6 +536,7 @@ you hire around the area or that you have a variety of people from different pla
 
         function computeFylla(){
             var email = sessionStorage.getItem('email');
+            document.getElementById('loader').style.display = "block";
             var lat = 0;
             var lng = 0;
             //Get Lat Lng -> hotelAccount/(email)
@@ -676,28 +677,32 @@ you hire around the area or that you have a variety of people from different pla
                                                 } else {
                                                     fylla_rating = food_source * 0.4 + manpower * 0.4 + customer_rating * 0.2;
                                                 }
-                                                console.log("Fylla Rating: " + fylla_rating);
-                                                console.log(10/3);
-                                            }).catch(function(error) {
-                                            console.log("Error getting documents: ", error);
-                                        });
 
+                                                defaultFirestore.collection('hotelAccount').doc(email).update({fylla_rating: fylla_rating}).then(function(){
+                                                    document.getElementById('loader').style.display = "none";
+                                            alert("Congratulations! Your new fylla rating is " + fylla_rating);
+                                                    location.href = "profile2.html";
                                         }).catch(function(error) {
-                                        console.log("Error getting documents: ", error);
+                                              alert("An error occured while calculating your Fylla Rating. Please try again later.");
+                                            });
+                                            }).catch(function(error) {
+                                            alert("An error occured while calculating your Fylla Rating. Please try again later.");
+                                        });
+                                        }).catch(function(error) {
+                                        alert("An error occured while calculating your Fylla Rating. Please try again later.");
                                     });
                             })
                             .catch(function(error) {
-                                console.log("Error getting documents: ", error);
+                                alert("An error occured while calculating your Fylla Rating. Please try again later.");
                             });
                             } else {
-                                console.log("Please enter your address");
+                                alert("Please enter first your hotel address");
                             }
-
                     } else {
-                            console.log("Error getting documents: ", error);
+                            alert("An error occured while calculating your Fylla Rating. Please try again later.");
                     }
             }).catch(function(error) {
-                    console.log("Error getting document:", error);
+                    alert("An error occured while calculating your Fylla Rating. Please try again later.");
             });
         }
     
