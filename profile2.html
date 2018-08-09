@@ -257,7 +257,7 @@
                             </div>
                         <div style="margin-left: 1vw; margin-top: -1vw;">
                             <div>
-                                <input type="checkbox" data-toggle="toggle" data-on="Live" data-off="Inactive">
+                                <input type="checkbox" data-toggle="toggle" data-on="Live" data-off="Inactive" onchange="toggleCheckbox(this)">
                             </div>
                             <div id="livecontact">   
                                 <img style="height: 1.5vw; width: 1.5vw;" src="phone-call.png">
@@ -713,6 +713,11 @@ you hire around the area or that you have a variety of people from different pla
             }).catch(function(error) {
                     alert("An error occured while calculating your Fylla Rating. Please try again later.");
             });
+        }
+    
+        function toggleCheckbox(element)
+        {
+            element.checked = !element.checked;
         }
     
         function angToRad(angle) {
