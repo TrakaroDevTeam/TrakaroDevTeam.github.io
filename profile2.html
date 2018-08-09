@@ -567,6 +567,7 @@ you hire around the area or that you have a variety of people from different pla
                                         defaultFirestore.collection('foodsource').doc(email).get().then(function(doc) {
                                                 var foods = doc.data().foods;
                                                 var food_size = foods.length;
+                                                var totalFoodSource = 0;
                                                 for(var i=0; i<foods.length; i++){
                                                     var lat1 = foods[i].lat;
                                                     var lng1 = foods[i].lng;
@@ -588,7 +589,26 @@ you hire around the area or that you have a variety of people from different pla
 
                                             let dist = d;
                                             let distKm = dist/1000;
-                                                    console.log(distKm);
+
+                                                    if(distKm <= 2.5){
+                                                totalFoodSource += 10;
+                                            }else if(distKm <= 10){
+                                                totalFoodSource += 9;
+                                            }else if(distKm <= 50){
+                                                    totalFoodSource += 7;
+                                            }else if(distKm <= 200){
+                                                totalFoodSource += 6;
+                                            }else if(distKm <= 1000){
+                                                totalFoodSource += 4;
+                                            }else if(distKm <= 5000){
+                                                totalFoodSource += 1;
+                                            }
+                                                }
+
+                                                if(food_size == 0){
+                                                    console.log("No Food Source");
+                                                } else {
+                                                    console.log("Foodsource: " + totalFoodSource/food_size);
                                                 }
                                         }).catch(function(error) {
                                         console.log("Error getting documents: ", error);
