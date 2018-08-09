@@ -752,7 +752,7 @@ you hire around the area or that you have a variety of people from different pla
         {
             var email = sessionStorage.getItem('email');
             defaultFirestore.collection('hotelAccount').doc(email).get().then(function(doc){
-                if(doc.data().live != null)
+                if(doc.data().live != null){
                     if(doc.data().live){
                         document.getElementById('liveBtn').checked = "true";
                     }
