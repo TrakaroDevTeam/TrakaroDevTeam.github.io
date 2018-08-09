@@ -24,6 +24,11 @@
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-storage.js"></script>
     
     <style>
+      .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
+      .toggle.ios .toggle-handle { border-radius: 20px; }
+    </style>
+    
+    <style>
     .checked {
     color: #70AD46;
     }
@@ -257,7 +262,7 @@
                             </div>
                         <div style="margin-left: 1vw; margin-top: -1vw;">
                             <div>
-                                <input type="checkbox" data-toggle="toggle" data-on="Live" data-off="Inactive" onchange="toggleCheckbox(this)">
+                                <input type="checkbox" data-style="ios" data-toggle="toggle" data-on="Live" data-off="Inactive" onchange="toggleCheckbox(this)">
                             </div>
                             <div id="livecontact">   
                                 <img style="height: 1.5vw; width: 1.5vw;" src="phone-call.png">
