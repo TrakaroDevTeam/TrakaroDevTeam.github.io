@@ -565,6 +565,8 @@ you hire around the area or that you have a variety of people from different pla
 
                                         //Get Food foodSource -> foodsource/(email)/foods
                                         defaultFirestore.collection('foodsource').doc(email).get().then(function(doc) {
+                                            var food_source = 0;
+                                            if (doc.exists) {
                                                 var foods = doc.data().foods;
                                                 var food_size = foods.length;
                                                 var totalFoodSource = 0;
@@ -606,10 +608,25 @@ you hire around the area or that you have a variety of people from different pla
                                                 }
 
                                                 if(food_size == 0){
-                                                    console.log("No Food Source");
+                                                    food_source = 0;
                                                 } else {
-                                                    console.log("Foodsource: " + totalFoodSource/food_size);
+                                                    food_source = totalFoodSource/food_size;
                                                 }
+                                            }
+
+                                            defaultFirestore.collection('manpower').doc(email).get().then(function(doc) {
+                                                var manpower = 0;
+                                                if (doc.exists) {
+                                                    var country = doc.data().country;
+                                                    console.log(country);
+                                                }
+
+
+
+                                            }).catch(function(error) {
+                                            console.log("Error getting documents: ", error);
+                                        });
+
                                         }).catch(function(error) {
                                         console.log("Error getting documents: ", error);
                                     });
