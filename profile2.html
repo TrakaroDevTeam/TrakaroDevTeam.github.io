@@ -256,6 +256,18 @@
                                     <img style=" width: 2.5vw; transform: rotate(15deg); margin-left: 7.5vw; margin-top: -10vw;" src="FYLLA-Icon.png" alt="logo">
                             </div>
                         <div style="margin-left: 1vw; margin-top: -1vw;">
+                            <div>
+                                <input type="checkbox" data-toggle="toggle" data-on="Enabled" data-off="Disabled">
+                                <input type="checkbox" id="toggle-two">
+                                <script>
+                                  $(function() {
+                                    $('#toggle-two').bootstrapToggle({
+                                      on: 'Enabled',
+                                      off: 'Disabled'
+                                    });
+                                  })
+                                </script>
+                            </div>
                             <div id="livecontact">   
                                 <img style="height: 1.5vw; width: 1.5vw;" src="phone-call.png">
                                 <p id="contact" style="word-wrap: break-word; margin-left:4vw; margin-top: -1.5vw;" class="card-text">No Contact number yet</p>
