@@ -684,7 +684,7 @@ you hire around the area or that you have a variety of people from different pla
 
                                                 defaultFirestore.collection('hotelAccount').doc(email).update({fylla_rating: fylla_rating}).then(function(){
                                                     document.getElementById('loader').style.display = "none";
-                                            alert("Congratulations! Your new fylla rating is " + fylla_rating);
+                                            alert("Congratulations! Your new fylla rating is " + fylla_rating.toFixed(2));
                                                     location.href = "profile2.html";
                                         }).catch(function(error) {
                                               alert("An error occured while calculating your Fylla Rating. Please try again later.");
