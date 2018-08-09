@@ -566,8 +566,29 @@ you hire around the area or that you have a variety of people from different pla
                                         //Get Food foodSource -> foodsource/(email)/foods
                                         defaultFirestore.collection('foodsource').doc(email).get().then(function(doc) {
                                                 var foods = doc.data().foods;
+                                                var food_size = foods.length;
                                                 for(var i=0; i<foods.length; i++){
-                                                    console.log(foods[i]);
+                                                    var lat1 = foods[i].lat;
+                                                    var lng2 = foods[i].lng;
+                                            /*Haversine : 2 r arcsin sqrt( sin^2((lat2 - lat1)/2) + cos(lat1) cos(lat2) sin^2((lng2 - lng1)/2) ) in km
+                                            *  r = radius of the earth : 6371km
+                                            */
+                                            var R = 6371e3; // metres
+                                            var a1 = angToRad(parseFloat(lat1));
+                                            var a2 = angToRad(parseFloat(lat));
+                                            var cA = angToRad(parseFloat(lat)-parseFloat(lat1));
+                                            var cT = angToRad(parseFloat(lng)-parseFloat(lng1));
+
+                                            var a = Math.sin(cA/2) * Math.sin(cA/2) +
+                                                    Math.cos(a1) * Math.cos(a2) *
+                                                    Math.sin(cT/2) * Math.sin(cT/2);
+                                            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+                                            var d = R * c;
+
+                                            let dist = d;
+                                            let distKm = dist/1000;
+                                                    console.log(distKm);
                                                 }
                                         }).catch(function(error) {
                                         console.log("Error getting documents: ", error);
@@ -586,6 +607,10 @@ you hire around the area or that you have a variety of people from different pla
             }).catch(function(error) {
                     console.log("Error getting document:", error);
             });
+        }
+    
+        function angToRad(angle) {
+            return (angle / 180) * Math.PI;
         }
     
         function openModal() {
