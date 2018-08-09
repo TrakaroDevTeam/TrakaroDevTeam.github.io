@@ -623,11 +623,11 @@ you hire around the area or that you have a variety of people from different pla
                                                     for (var property in country) {
                                                     if (country.hasOwnProperty(property)) {
                                                         var datas = country[property].data;
-                                                        for(var i=0; i<datas.length; i++){
-                                                            count += datas[i].residents;
+                                                                for(var i=0; i<datas.length; i++){
+                                                                    count += datas[i].residents;
 
-                                                            var lat1 = datas[i].lat;
-                                                            var lng1 = datas[i].lng;
+                                                                    var lat1 = datas[i].lat;
+                                                                    var lng1 = datas[i].lng;
                                                             /*Haversine : 2 r arcsin sqrt( sin^2((lat2 - lat1)/2) + cos(lat1) cos(lat2) sin^2((lng2 - lng1)/2) ) in km
                                                             *  r = radius of the earth : 6371km
                                                             */
@@ -668,8 +668,15 @@ you hire around the area or that you have a variety of people from different pla
                                                     } else {
                                                         manpower = totalManpower/count;
                                                     }
-                                                    console.log(manpower);
                                                 }
+
+                                                var fylla_rating = 0;
+                                                if(customer_rating == 0){
+                                                    fylla_rating = food_source * 0.5 + manpower * 0.5;
+                                                } else {
+                                                    fylla_rating = food_source * 0.4 + manpower * 0.4 + customer_rating * 0.2;
+                                                }
+                                                console.log("Fylla Rating: " + fylla_rating);
                                             }).catch(function(error) {
                                             console.log("Error getting documents: ", error);
                                         });
