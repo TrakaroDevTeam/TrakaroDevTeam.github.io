@@ -15,14 +15,14 @@
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="trakaro.css" />
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-    
+
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-storage.js"></script>
-    
+
     <style>
        .toggle {
             margin-left: 3vw !important;
@@ -32,16 +32,16 @@
             min-width: 0vw !important;
             min-height: 0vw !important;
         }
-        
+
         .btn {
-            font-size: 1vw !important;  
+            font-size: 1vw !important;
             padding: 0.25vw 1vw !important;
         }
-        
+
       .toggle.ios, .toggle-on.ios, .toggle-off.ios { font-size: 1vw; border-radius: 1vw; }
       .toggle.ios .toggle-handle { font-size: 1vw; border-radius: 1vw; }
     </style>
-    
+
     <style>
     .checked {
     color: #70AD46;
@@ -87,12 +87,12 @@
     }
 
     #foodsource button{
-        background:#c7c6c6 !important; 
-        border: none; 
-        border-radius: 0.3vw; 
-        margin-top: 0.5vw; 
+        background:#c7c6c6 !important;
+        border: none;
+        border-radius: 0.3vw;
+        margin-top: 0.5vw;
         height: 2.5vw;
-        width: 31vw;   
+        width: 31vw;
         cursor: context-menu;
         outline: none;
     }
@@ -137,9 +137,9 @@
     .mySlides {
     display: none;
     }
-        
+
     #calcFylla:hover {
-        cursor: pointer;    
+        cursor: pointer;
     }
 
     .cursor {
@@ -223,13 +223,13 @@
 
     .review {
     background-color: lightblue;
-    height: 60vw; 
+    height: 60vw;
     width: 33vw;
     overflow: scroll;
     }
 </style>
 </head>
-<body style="overflow-x: hidden;">
+<body style="overflow-x: hidden; background-color: #f2f2f2;">
 <div id="loader" style="position:fixed; padding:0vw; margin:0vw; z-index: 1000; top:0; left:0; width: 100%; height: 100%; background:rgba(0, 0, 0, 0.637)">
         <div class="loader"></div>
     </div>
@@ -238,20 +238,20 @@
             <div class="col-sm-1"></div>
                 <div class="container-fluid">
                     <div class="navbar-header" style="margin: 0.6vw; margin-left:-0.1vw">
-                        <img class="img-circle" src="img/TrakaroIcon.png" alt="trakaroicon" style="width: 4.7vw;"> 
-                        <img src="img/trakaro.png" alt="trakaro" style="position: relative; width: 11.7vw; top: 0.3vw" onclick="computeFylla()"> 
+                        <img class="img-circle" src="img/TrakaroIcon.png" alt="trakaroicon" style="width: 4.7vw;">
+                        <img src="img/trakaro.png" alt="trakaro" style="position: relative; width: 11.7vw; top: 0.3vw" onclick="computeFylla()">
                     </div>
                 </div>
         </nav>
     </div>
     <div class="container-fluid">
-  
+
             <div class="row">
               <div style="background-color:#f2f2f2; height: 100vw; position:absolute; top: 0; width: 25vw;">
                     <div style="height:10vw; margin-top: 8vw;">
                         <img id="hotel_photo" style = "margin-left: auto; margin-right: auto; display: block; border-radius: 50%;  box-shadow: 1px 3px 10px grey; background-color:white; height: 11vw; width: 11vw;" src="piclogo1.png" alt="logo">
                     </div>
-                    <div style="position:relative; margin-top: 2vw; margin-bottom: 2vw; padding-left: 1vw; padding-right: 1vw;">            
+                    <div style="position:relative; margin-top: 2vw; margin-bottom: 2vw; padding-left: 1vw; padding-right: 1vw;">
                             <h3 id="name" style="font-size: 2vw;" align="center"><b>HOTEL NAME</b></h3>
                             <hr>
                             <p id="noFyllaPlaceHolder" align="center" style="display: none; margin-top: -1vw;">No Customer and Fylla Rating Yet</p>
@@ -285,13 +285,13 @@
                                 </div>
                                 <input id="liveBtn" style="margin-left: 3vw;" type="checkbox" data-toggle="toggle" data-on="Live" data-off="Inactive" data-style="ios" onchange="toggleCheckbox(this)">
                             </div>
-                            <div id="livecontact">   
+                            <div id="livecontact">
                                 <img style="height: 1.5vw; width: 1.5vw;" src="phone-call.png">
                                 <p id="contact" style="word-wrap: break-word; margin-left:4vw; margin-top: -1.5vw;" class="card-text">No Contact number yet</p>
                             </div>
                             <div id="liveemail">
                                 <img style="height: 1.5vw; width: 1.5vw;" src="email.png">
-                                <p id="email" style="word-wrap: break-word; margin-left:4vw; margin-top: -1.5vw;" class="card-text">No Email yet</p>        
+                                <p id="email" style="word-wrap: break-word; margin-left:4vw; margin-top: -1.5vw;" class="card-text">No Email yet</p>
                             </div>
                             <div id="livewebsite">
                                 <img style="height: 1.5vw; width: 1.5vw;" src="international.png">
@@ -299,7 +299,7 @@
                             </div>
                             <div id="liveaddress">
                                 <img style="height: 1.5vw; width: 1.5vw;" src="maps-and-flags.png">
-                                <p id="address" style="word-wrap: break-word; margin-left:4vw; margin-top: -1.5vw;" class="card-text">No address yet</p>        
+                                <p id="address" style="word-wrap: break-word; margin-left:4vw; margin-top: -1.5vw;" class="card-text">No address yet</p>
                             </div>
                             <div id="livebook">
                                 <img style="height: 1.5vw; width: 1.5vw;" src="clipboard-with-pencil-.png">
@@ -308,8 +308,9 @@
                             </div>
                         </div>
                     </div>
-              <div style=" height: 100vw; position:absolute; right: 0; top: 0; width: 72vw;">
-                  <img id="cover_photo" src="CoverPhoto.png" style="object-fit: cover; width:75vw; height: 40vw; margin-left: -1.5vw; margin-top: 0vw;">
+              <div style="background-color: white; height: 100vw; position:fixed; right: 0; top: 0; width: 75vw;"></div>
+              <div style=" height: 100vw; position:absolute; right: 0; top: 0; width: 75vw;">
+                  <img id="cover_photo" src="CoverPhoto.png" style="object-fit: cover; width:75vw; height: 40vw; margin-top: 0vw;">
                   <div class="dropdown" style="left: 58vw; top: 1vw; width: 10vw;">
                         <i data-toggle="dropdown" style="font-size: 3vw; color:#999; margin-left: 7vw; " class="fa fa-gear cursor"></i>
                         <ul class="dropdown-menu">
@@ -341,7 +342,7 @@
                                   <a class="nav-link" style="color: #70AD46;" href="#experience" role="tab" data-toggle="tab" aria-selected="false">EXPERIENCE</a>
                                 </li>
                               </ul>
-                              
+
                               <!-- Tab panes -->
                               <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade in active" id="foodsource">
@@ -356,55 +357,55 @@
                                         <img style="height: 6vw; width: 6vw; margin-bottom: 0.5vw;" src="Beef1.png">
                                         <p style="margin-left:7vw; margin-top: -4vw; margin-bottom: 2.5vw;" class="card-text"><b>Beef</b></p>
                                         <button style="margin-top: 0.5vw; height: 2.5vw; width: 31vw;" type="button" class="btn"><p style="font-size: 1vw;" align="left">No Food Source Network Available yet</p></button>
-                                    </div> 
+                                    </div>
                                     <br><br><hr>
                                     <div id="pork-container" style="margin-left: 1vw; position:relative">
                                             <img style="height: 6vw; width: 6vw; margin-bottom: 0.5vw;" src="Pork1.png">
                                             <p style="margin-left:7vw; margin-top: -4vw; margin-bottom: 2.5vw;" class="card-text"><b>Pork</b></p>
-                                            <button style="margin-top: 0.5vw; height: 2.5vw; width: 31vw;" type="button" class="btn"><p style="font-size: 1vw;" align="left">No Food Source Network Available yet</p></button>      
-                                    </div> 
+                                            <button style="margin-top: 0.5vw; height: 2.5vw; width: 31vw;" type="button" class="btn"><p style="font-size: 1vw;" align="left">No Food Source Network Available yet</p></button>
+                                    </div>
                                     <br><br><hr>
                                     <div id="chicken-container" style="margin-left: 1vw; position:relative">
                                         <img style="height: 6vw; width: 6vw; margin-bottom: 0.5vw;" src="Chicken1.png">
                                         <p style="margin-left:7vw; margin-top: -4vw; margin-bottom: 2.5vw;" class="card-text"><b>Chicken</b></p>
-                                        <button style="margin-top: 0.5vw; height: 2.5vw; width: 31vw;" type="button" class="btn"><p style="font-size: 1vw;" align="left">No Food Source Network Available yet</p></button>      
+                                        <button style="margin-top: 0.5vw; height: 2.5vw; width: 31vw;" type="button" class="btn"><p style="font-size: 1vw;" align="left">No Food Source Network Available yet</p></button>
                                     </div>
                                     <br><br><hr>
                                     <div id="crustacean-container" style="margin-left: 1vw; position:relative">
                                         <img style="height: 6vw; width: 6vw; margin-bottom: 0.5vw;" src="Seafood1.png">
                                         <p style="margin-left:7vw; margin-top: -4vw; margin-bottom: 2.5vw;" class="card-text"><b>Crustacean</b></p>
-                                        <button style="margin-top: 0.5vw; height: 2.5vw; width: 31vw;" type="button" class="btn"><p style="font-size: 1vw;" align="left">No Food Source Network Available yet</p></button>      
-                                    </div>  
+                                        <button style="margin-top: 0.5vw; height: 2.5vw; width: 31vw;" type="button" class="btn"><p style="font-size: 1vw;" align="left">No Food Source Network Available yet</p></button>
+                                    </div>
                                     <br><br><hr>
                                     <div id="vegespice-container" style="margin-left: 1vw; position:relative">
                                         <img style="height: 6vw; width: 6vw; margin-bottom: 0.5vw;" src="Vegetable1.png">
                                         <p style="margin-left:7vw; margin-top: -4vw; margin-bottom: 2.5vw;" class="card-text"><b>Vegetable and Spices</b></p>
-                                        <button style="margin-top: 0.5vw; height: 2.5vw; width: 31vw;" type="button" class="btn"><p style="font-size: 1vw;" align="left">No Food Source Network Available yet</p></button>      
-                                    </div> 
+                                        <button style="margin-top: 0.5vw; height: 2.5vw; width: 31vw;" type="button" class="btn"><p style="font-size: 1vw;" align="left">No Food Source Network Available yet</p></button>
+                                    </div>
                                     <br><br><hr>
                                     <div id="fish-container" style="margin-left: 1vw; position:relative">
                                         <img style="height: 6vw; width: 6vw; margin-bottom: 0.5vw;" src="Fish1.png">
                                         <p style="margin-left:7vw; margin-top: -4vw; margin-bottom: 2.5vw;" class="card-text"><b>Fish</b></p>
-                                        <button style="margin-top: 0.5vw; height: 2.5vw; width: 31vw;" type="button" class="btn"><p style="font-size: 1vw;" align="left">No Food Source Network Available yet</p></button>      
-                                    </div> 
+                                        <button style="margin-top: 0.5vw; height: 2.5vw; width: 31vw;" type="button" class="btn"><p style="font-size: 1vw;" align="left">No Food Source Network Available yet</p></button>
+                                    </div>
                                     <br><br><hr>
                                     <div id="egg-container" style="margin-left: 1vw; position:relative">
                                         <img style="height: 6vw; width: 6vw; margin-bottom: 0.5vw;" src="Egg1.png">
                                         <p style="margin-left:7vw; margin-top: -4vw; margin-bottom: 2.5vw;" class="card-text"><b>Egg</b></p>
-                                        <button style="margin-top: 0.5vw; height: 2.5vw; width: 31vw;" type="button" class="btn"><p style="font-size: 1vw;" align="left">No Food Source Network Available yet</p></button>      
-                                    </div> 
+                                        <button style="margin-top: 0.5vw; height: 2.5vw; width: 31vw;" type="button" class="btn"><p style="font-size: 1vw;" align="left">No Food Source Network Available yet</p></button>
+                                    </div>
                                     <br><br><hr>
                                     <div id="beverage-container" style="margin-left: 1vw; position:relative">
                                             <img style="height: 6vw; width: 6vw; margin-bottom: 0.5vw;" src="Beverage1.png">
                                             <p style="margin-left:7vw; margin-top: -4vw; margin-bottom: 2.5vw;" class="card-text"><b>Beverage</b></p>
-                                            <button style="margin-top: 0.5vw; height: 2.5vw; width: 31vw;" type="button" class="btn"><p style="font-size: 1vw;" align="left">No Food Source Network Available yet</p></button>      
-                                    </div> 
+                                            <button style="margin-top: 0.5vw; height: 2.5vw; width: 31vw;" type="button" class="btn"><p style="font-size: 1vw;" align="left">No Food Source Network Available yet</p></button>
+                                    </div>
                                     <br><br><hr>
                                     <div id="water-container" style="margin-left: 1vw; position:relative">
                                             <img style="height: 6vw; width: 6vw; margin-bottom: 0.5vw;" src="Water1.png">
                                             <p style="margin-left:7vw; margin-top: -4vw; margin-bottom: 2.5vw;" class="card-text"><b>Water</b></p>
-                                            <button style="margin-top: 0.5vw; height: 2.5vw; width: 31vw;" type="button" class="btn"><p style="font-size: 1vw;" align="left">No Food Source Network Available yet</p></button>      
-                                    </div> 
+                                            <button style="margin-top: 0.5vw; height: 2.5vw; width: 31vw;" type="button" class="btn"><p style="font-size: 1vw;" align="left">No Food Source Network Available yet</p></button>
+                                    </div>
                                     <br><br><hr>
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="manpower">
@@ -419,12 +420,12 @@ you hire around the area or that you have a variety of people from different pla
                                             <img style="height: 6vw; width: 6vw;" src="Picture1.png">
                                             <p style="margin-left:7vw; margin-top: -4vw; margin-bottom: 2.5vw;" class="card-text"><b>Man Power</b></p>
                                             <button style="margin-left: 0.5vw; margin-top: 0.75vw; height: 2.5vw; width: 6vw; border-top-left-radius: 50vw; border-bottom-left-radius: 50vw;"><p style="padding-top: 0.25vw;">0</p></button> <button style="margin-left: 0.5vw; margin-top: -0.25vw; height: 2.5vw; width: 25vw; border-top-right-radius: 50vw; border-bottom-right-radius: 50vw;" type="button" class="btn"><p align="left">No Man Power Proximity Available yet</p></button>
-                                            
-                                            
+
+
                                             <br><br><hr>
-                                        </div> 
+                                        </div>
                                     </div>
-                                    
+
                                     <!--<div style="margin-left: 1vw; position: relative;">
                                         <img style="height: 6vw; width: 6vw;" src="Picture1.png">
                                         <p style="margin-left:7vw; margin-top: -4vw; margin-bottom: 2.5vw;" class="card-text"><b>United States of America</b></p>
@@ -452,7 +453,7 @@ you hire around the area or that you have a variety of people from different pla
                                                 <div id="veryGoodId" class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:0%; background-color:#ED7D31;">
                                                 </div>
                                             </div>
-                                        </div>  
+                                        </div>
                                         <p id="averageIdNum" style="margin-left: 31vw; position: absolute;">0</p>
                                         <p>Average</p>
                                         <div style="margin-left: 6vw; margin-top: -2.3vw;">
@@ -460,7 +461,7 @@ you hire around the area or that you have a variety of people from different pla
                                                 <div id="averageId" class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:0%; background-color:#ED7D31;">
                                                 </div>
                                             </div>
-                                        </div>  
+                                        </div>
                                         <p id="poorIdNum" style="margin-left: 31vw; position: absolute;">0</p>
                                         <p>Poor</p>
                                         <div style="margin-left: 6vw; margin-top: -2.3vw;">
@@ -468,7 +469,7 @@ you hire around the area or that you have a variety of people from different pla
                                                 <div id="poorId" class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:0%; background-color:#ED7D31;">
                                                 </div>
                                             </div>
-                                        </div> 
+                                        </div>
                                         <p id="terribleIdNum" style="margin-left: 31vw; position: absolute;">0</p>
                                         <p>Terrible</p>
                                         <div style="margin-left: 6vw; margin-top: -2.3vw;">
@@ -476,7 +477,7 @@ you hire around the area or that you have a variety of people from different pla
                                                 <div id="terribleId" class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:0%; background-color:#ED7D31;">
                                                 </div>
                                             </div>
-                                        </div> 
+                                        </div>
                                         <div id="starsRating" style="position:absolute; margin-top: 1vw;">
                                             <span style="font-size: 2vw;" class="fa fa-star"></span>
                                             <span style="font-size: 2vw;" class="fa fa-star"></span>
@@ -532,7 +533,7 @@ you hire around the area or that you have a variety of people from different pla
                                     </div>
                                 </div>
                               </div>
-                    </div> 
+                    </div>
             </div>
         </div>
     </div>
@@ -543,11 +544,11 @@ you hire around the area or that you have a variety of people from different pla
                 </div>
               <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
               <a class="next" onclick="plusSlides(1)">&#10095;</a>
-          
+
               <div class="caption-container">
                 <p id="caption"></p>
               </div>
-          
+
               <div id = "galleryColumn">
               </div>
             </div>
@@ -557,30 +558,26 @@ you hire around the area or that you have a variety of people from different pla
 <script src="main10.js"></script>
 <script src="main11.js"></script>
 <script>
-    if(sessionStorage.getItem('email') == null || sessionStorage.getItem('email') == undefined){
-        alert('Please login to continue');
-        location.href="hotel-index.html";
-    }
 </script>
 <script>
         loadReviews();
         checkLive();
-    
+
         function openModal() {
           document.getElementById('myModal').style.display = "block";
         }
-        
+
         function closeModal() {
           document.getElementById('myModal').style.display = "none";
         }
-        
+
         var slideIndex = 1;
         showSlides(slideIndex);
-        
+
         function plusSlides(n) {
           showSlides(slideIndex += n);
         }
-        
+
         function currentSlide(n) {
           showSlides(slideIndex = n);
         }
