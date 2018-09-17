@@ -226,7 +226,11 @@
                                     var pl = place.address_components;
 
                                     pl.forEach(function (arrayItem) {
-                                        console.log(arrayItem.types);
+                                        for(var i=0; i<arrayItem.types; i++){
+                                          if(arrayItem.types[i] == "administrative_area_level_2"){
+                                            console.log(place.address_components);
+                                          }
+                                        }
                                     });
 
                                     address = [
