@@ -170,6 +170,14 @@
                          
                       <script>
                       
+                          $(document).ready(function(){
+                              $("button").click(function(){
+                                  setTimeout(function(){
+                                      initialize();
+                                  }, 200);
+                              });
+                          });
+                          
                           function initialize(){
                                 insertSearch("address");
                           }
