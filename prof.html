@@ -205,10 +205,7 @@
 
                             var input = document.getElementById(id);
 
-                            var options = {
-                              types: ['(cities)']
-                            };
-                            var autocomplete = new google.maps.places.Autocomplete(input, options);
+                            var autocomplete = new google.maps.places.Autocomplete(input);
 
                             autocomplete.addListener('place_changed', function() {
                                 var place = autocomplete.getPlace();
@@ -225,7 +222,7 @@
                                     hotel_data.address = place.formatted_address;
                                     hotel_data.lat = place.geometry.location.lat();
                                     hotel_data.lng = place.geometry.location.lng();
-                                    console.log(place);
+                                    console.log(hotel_data.lng);
 
                                     address = [
                                     (place.address_components[0] && place.address_components[0].short_name || ''),
