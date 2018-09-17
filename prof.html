@@ -205,7 +205,10 @@
 
                             var input = document.getElementById(id);
 
-                            var autocomplete = new google.maps.places.Autocomplete(input);
+                            var options = {
+                              types: ['(cities)']
+                            };
+                            var autocomplete = new google.maps.places.Autocomplete(input, options);
 
                             autocomplete.addListener('place_changed', function() {
                                 var place = autocomplete.getPlace();
@@ -229,6 +232,8 @@
                                     (place.address_components[1] && place.address_components[1].short_name || ''),
                                     (place.address_components[2] && place.address_components[2].short_name || '')
                                     ].join(' ');
+                                } else {
+                                    console.log("None");
                                 }
                             });
                         }
