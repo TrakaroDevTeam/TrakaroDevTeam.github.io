@@ -190,10 +190,14 @@
                               if(hotel_data.lng == null){
                                   hotel_data.lng = 0;
                               }
+                              if(hotel_data.province == null){
+                                  hotel_data.province = "";
+                              }
                               defaultFirestore.collection('hotelAccount').doc(email).update({
                                  address: hotel_data.address,
                                  lat: hotel_data.lat,
-                                 lng: hotel_data.lng
+                                 lng: hotel_data.lng,
+                                 province: hotel_data.province
                               });
                           }
                           
