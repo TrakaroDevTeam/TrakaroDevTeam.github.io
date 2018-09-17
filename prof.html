@@ -222,7 +222,12 @@
                                     hotel_data.address = place.formatted_address;
                                     hotel_data.lat = place.geometry.location.lat();
                                     hotel_data.lng = place.geometry.location.lng();
-                                    console.log(place.address_components);
+                                    
+                                    var pl = place.address_components;
+
+                                    pl.forEach(function (arrayItem) {
+                                        console.log(arrayItem.types);
+                                    });
 
                                     address = [
                                     (place.address_components[0] && place.address_components[0].short_name || ''),
