@@ -45,6 +45,10 @@
     background-color: white !important;
 }
 
+.bg-tertiarylight {
+    background-color: white !important;
+}
+
 .bg-tertiarygreen:hover {
     background-color: #4d7023 !important;
     color: white;
@@ -52,6 +56,23 @@
 
 .bg-tertiarygreen:focus {
     background-color: #4d7023 !important;
+    outline:0;
+    color: white;
+}
+
+.bg-tertiarylight:hover {
+    background-color: #f8a531 !important;
+    color: white;
+}
+
+.bg-tertiarylight:focus {
+    background-color: #f8a531 !important;
+    outline:0;
+    color: white;
+}
+
+.btn.lightactive {
+    background-color: #f8a531 !important;
     color: white;
 }
 
@@ -67,6 +88,7 @@
 
 .bg-tertiaryorange:focus {
     background-color: #ED7D31 !important;
+    outline:0;
     color: white;
 }
 
@@ -176,8 +198,12 @@
     color: #70AD46;
 }
 
+.text-light {
+    color: #f8a531;
+}
+
 .text-gray {
-    color: #7f7f7f;    
+    color: #7f7f7f;
 }
 
 .text-orange {
@@ -223,13 +249,13 @@ input[type="file"] {
     -webkit-animation: spin 2s linear infinite; /* Safari */
     animation: spin 2s linear infinite;
   }
-  
+
   /* Safari */
   @-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }
     100% { -webkit-transform: rotate(360deg); }
   }
-  
+
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
