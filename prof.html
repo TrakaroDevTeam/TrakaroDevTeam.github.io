@@ -20,7 +20,8 @@
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-storage.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
-    
+    <script language="javascript" src="JIC.min.js"></script>
+
     <style>
     .checked {
     color: #70AD46;
@@ -32,6 +33,9 @@
 </style>
 </head>
 <body style="overflow-x: hidden;">
+  <img id="sourceImg" style="height:40vw; width:75vw; position: fixed; left: 1000vw; top: -1000vw;"/>
+  <img id="profileImg" style="height: 11vw; width: 11vw; position: fixed; left: 1000vw; top: -1000vw;"/>
+  <img id="otherImg" style="height: 14vw; width: 21vw; position: fixed; left: 1000vw; top: -1000vw;"/>
 <div id="loader" style="position:fixed; padding:0vw; margin:0vw; z-index: 1000; top:0; left:0; width: 100%; height: 100%; background:rgba(0, 0, 0, 0.637)">
         <div class="loader"></div>
     </div>
@@ -40,14 +44,14 @@
             <div class="col-sm-1"></div>
                 <div class="container-fluid">
                     <div class="navbar-header" style="margin: 0.5vw; margin-left:-0.1vw">
-                        <img class="img-circle" src="img/TrakaroIcon.png" alt="trakaroicon" style="width: 4.7vw;"> 
-                        <img src="img/trakaro.png" alt="trakaro" style="position: relative; width: 11.7vw; top: 0.3vw"> 
+                        <img class="img-circle" src="img/TrakaroIcon.png" alt="trakaroicon" style="width: 4.7vw;">
+                        <img src="img/trakaro.png" alt="trakaro" style="position: relative; width: 11.7vw; top: 0.3vw">
                     </div>
                 </div>
         </nav>
     </div>
     <div class="container-fluid">
-  
+
             <div class="row">
               <div style="background-color:#f2f2f2; height: 100vw; position:fixed; top: 0; width: 25vw;">
                     <div style="height:10vw; margin-top: 9vw;">
@@ -55,11 +59,11 @@
                             <label class="custom-file-upload">
                             <input type="file" id="pic"/>
                             <img style = "position: fixed; top: 9vw; left: 7vw; border-radius: 100%; opacity: 0.5; background-color:black; height: 11vw; width: 11vw; cursor: pointer" src="changeprofile.png">
-                            <p style = "position: fixed; top: 13.5vw; left: 9.3vw; font-size: 1.5vw; cursor: pointer"> 256 x 256 </p>                              
+                            <p style = "position: fixed; top: 13.5vw; left: 9.3vw; font-size: 1.5vw; cursor: pointer"> 256 x 256 </p>
                             </label>
                             <img onclick="removeProfPic()" style = "position: fixed; top: 8.5vw; left: 14.5vw; border-radius: 50%; background-color: none; height: 3.5vw; width: 3.5vw; cursor: pointer;" src="close.png">
                         </div>
-                    <div style="position:relative; margin-top: 2vw; margin-bottom: 2vw; padding-left: 1vw; padding-right: 1vw;">            
+                    <div style="position:relative; margin-top: 2vw; margin-bottom: 2vw; padding-left: 1vw; padding-right: 1vw;">
                             <h3 id="name" class="card-title" align="center"><b>HOTEL NAME</b></h3>
                             <hr>
                             <p align="center" style="margin-top: -1vw;">No Customer and Fylla Rating Yet</p>
@@ -96,16 +100,16 @@
                             <input style="margin-left:1vw; width: 19vw; margin-top: -1.5vw; padding: 0.5vw 1vw 0.5vw 1vw" class="round0 font1" type="text" id="booking_url" name="url" placeholder="Booking Url">
                             </div>
                         </div>
-                
+
               </div>
-              <div style=" height: 100vw; position:absolute; right: 0; top: 0vw; width: 72vw;">
+              <div style=" height: 100vw; position:absolute; right: 0; top: 5.5vw; width: 72vw;">
                     <p style="position:absolute; margin-top: 10vw; margin-left: 23vw; z-index: 10; font-size: 5vw; ">1030 x 550</p>
                 <img id="cover_pic" style="background-image: url('CoverPhoto.png'); background-size: cover; background-repeat: no-repeat; background-position: center; height:40vw; width:75vw; margin-left: -1.5vw; margin-top: -10vw;">
                     <label class="custom-file-upload">
                         <input type="file" id="cover"/>
-                    <div style="position: absolute; top: 6vw; left: 56.5vw; padding: 0.75vw 2vw 0.75vw 2vw; margin:1vw; z-index: 2 !important; font-size:1.1vw;" class="btn-transblack">CHANGE COVER</div>
+                    <div style="position: absolute; top: 0.5vw; left: 56.5vw; padding: 0.75vw 2vw 0.75vw 2vw; margin:1vw; z-index: 2 !important; font-size:1.1vw;" class="btn-transblack">CHANGE COVER</div>
                     </label>
-                  <div onclick="removeCover()" style="position: absolute; top: 10vw; left: 56.5vw; padding: 0.75vw 2vw 0.75vw 2vw; margin:1vw; z-index: 2 !important; font-size:1.1vw;" class="btn-transblack"><b>REMOVE COVER</b></div>                  
+                  <div onclick="removeCover()" style="position: absolute; top: 4.5vw; left: 56.5vw; padding: 0.75vw 2vw 0.75vw 2vw; margin:1vw; z-index: 2 !important; font-size:1.1vw;" class="btn-transblack"><b>REMOVE COVER</b></div>
                   <div style="position:relative; margin-top: 1vw; margin-bottom: 2vw; margin-left: 2vw; margin-right: 2vw;">
                         <p style="font-size:1.5vw;"><b>HOTEL INFORMATION</b></p>
                         <hr>
@@ -126,7 +130,7 @@
                             <div id="noPhoto"></div>
                             <div id="oldPics">
                             </div>
-                                        
+
                               <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-app.js"></script>
 
                             <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
@@ -146,7 +150,7 @@
 
                         <img style="height: 2.5vw; width: 2.5vw; position: absolute; top: 41vw; left:63.2vw; cursor: pointer" src="close-black.png">
 
-                        <a target="_blank" href="2.jpg"> 
+                        <a target="_blank" href="2.jpg">
                         <img style="height: 14vw; width: 21vw; margin:0.5vw" src="2.jpg">
                         </a>
 
@@ -164,22 +168,22 @@
 
                         <img style="height: 2.5vw; width: 2.5vw; position: absolute; top: 56vw; left:63.2vw; cursor: pointer" src="close-black.png">
 
-                        <a target="_blank" href="2.jpg"> 
+                        <a target="_blank" href="2.jpg">
                                 <img style="height: 14vw; width: 21vw; margin:0.5vw" src="2.jpg">
                          </a>-->
-                         
+
                       <script>
-                      
+
                           $(document).ready(function(){
                               setTimeout(function(){
                                   initialize();
                               }, 500);
                           });
-                          
+
                           function initialize(){
                                 insertSearch("address");
                           }
-                          
+
                           function updateAddress(){
                               if(hotel_data.address == null){
                                   hotel_data.address = "";
@@ -200,11 +204,11 @@
                                  province: hotel_data.province
                               });
                           }
-                          
+
                           function showLoader(){
-                            document.getElementById("loader").style.display = "block";   
+                            document.getElementById("loader").style.display = "block";
                           }
-                          
+
                           function insertSearch(id){
 
                             var input = document.getElementById(id);
@@ -222,10 +226,10 @@
 
                                 var address = '';
                                 if (place.address_components) {
-                                    
+
                                     var pl = place.address_components;
                                     var shown = false;
-                                    
+
                                     pl.forEach(function (arrayItem) {
 
                                         for(var i=0; i<arrayItem.types.length; i++){
@@ -235,7 +239,7 @@
                                           }
                                         }
                                     });
-                                    
+
                                     if(!shown){
                                         alert("Please enter address atleast city level");
                                     } else {
@@ -253,15 +257,15 @@
                                 }
                             });
                         }
-                      
+
                       </script>
-                      
+
                          <div style="clear:both; margin-left: 38.7vw; margin-top: 10vw">
                                 <button type="button" class="btn btn-success bg-tertiarygreen text-green font2" style="float:left; border-radius: 2vw; padding: 0.4vw 4vw 0.4vw 4vw; margin-right: 1.4vw;" onclick="discard()">Discard</button>
                                 <button type="button" class="btn btn-warning bg-secondary2 text-white font2" style="border-radius: 2vw; padding: 0.4vw 5vw 0.4vw 5vw" onclick="save()">Save</button>
-                        </div>                     
+                        </div>
 
-                    </div> 
+                    </div>
             </div>
         </div>
     </div>
