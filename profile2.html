@@ -305,12 +305,23 @@
                                 <img style="height: 1.5vw; width: 1.5vw;" src="clipboard-with-pencil-.png">
                                 <p id="booking_url" style="word-wrap: break-word; margin-left:4vw; margin-top: -1.5vw; width: 10vw;" class="card-text">No booking URL yet</p>
                             </div>
+                            <br><br><br><br>
+                            <div id="packageGroup" style="display: none;">
+                              <p style="width: 100%;"><b style="font-size: 2vw;">Package Pricing</b></p>
+                              <br>
+                              <p style="font-size: 1.5vw;">Single: <b id="price1">0</b><p>
+                              <p style="font-size: 1.5vw;">Couple: <b id="price2">0</b><p>
+                              <p style="font-size: 1.5vw;">Group(per person): <b id="price3">0</b><p>
+                            </div>
                             </div>
                         </div>
                     </div>
               <div style="background-color: white; height: 100vw; position:fixed; right: 0; top: 0; width: 75vw;"></div>
               <div style=" height: 100vw; position:absolute; right: 0; top: 5.5vw; width: 75vw;">
                   <img id="cover_photo" src="CoverPhoto.png" style="object-fit: cover; width:75vw; height: 40vw; margin-top: 0vw;">
+                  <video id="videoSource" style="background-color: black; z-index: 10; width: 75vw; height: 40vw; position: absolute; left: 0vw; top: 0vw;" poster="CoverPhoto.png" controls="">
+                    Your browser does not support HTML5 video.
+                  </video>
                   <div class="dropdown" style="left: 61vw; top: 1vw; width: 10vw;">
                         <i data-toggle="dropdown" style="font-size: 3vw; color:#999; margin-left: 7vw; " class="fa fa-gear cursor"></i>
                         <ul class="dropdown-menu">
@@ -319,10 +330,16 @@
                         </ul>
                       </div>
                   <div style="position:relative; margin-top: 1vw; margin-bottom: 2vw; margin-left: 5vw; margin-right: 2vw;">
-                        <p style="font-size:1.5vw;"><b>HOTEL INFORMATION</b></p>
+                        <p style="font-size:1.5vw;"><b id="title1">HOTEL INFORMATION</b></p>
                         <hr>
                         <p id="info" align="justify" style="text-indent: 3vw;">No Information available yet</p>
-                        <br><hr>
+                        <hr>
+                        <div id="forAttraction" style="display: none;">
+                          <p style="font-size:1.5vw;"><b>THINGS TO REMEMBER</b></p>
+                          <br>
+                          <p id="things" align="justify" style="padding-left: 3vw;">No Information available yet</p>
+                          <hr>
+                        </div>
                         <p id="photos" style="font-size:1.5vw;"><b>PHOTOS</b></p>
                         <div id="noPhoto" ></div>
                         <div id="gallery"></div>
@@ -562,6 +579,9 @@ you hire around the area or that you have a variety of people from different pla
 <script>
         loadReviews();
         checkLive();
+
+        var video_url = "";
+        var user_type = "";
 
         function openModal() {
           document.getElementById('myModal').style.display = "block";
