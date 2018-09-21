@@ -7,6 +7,14 @@
     background-color: white;
 }
 
+.bg2  {
+    background-image: url("img/sample.png");
+    background-size: 50vw;
+    background-repeat: no-repeat;
+    background-position-x: 0;
+    background-position-y: -1vw;
+}
+
 .bg-primary {
     background-color: #70AD46 !important;
   }
@@ -17,6 +25,7 @@
 
 .bg-primary2:hover {
     background-color: #EB9723 !important;
+    transition: 0.4s;
     color: white;
 }
 
@@ -30,6 +39,7 @@
 }
 
 .bg-secondary2:hover {
+    transition: 0.4s;
     background-color: #EB9723 !important;
 }
 
@@ -49,8 +59,13 @@
     background-color: white !important;
 }
 
+.bg-primaryorange {
+    background-color: #ED7D31 !important;
+}
+
 .bg-tertiarygreen:hover {
     background-color: #4d7023 !important;
+    transition: 0.4s;
     color: white;
 }
 
@@ -62,6 +77,7 @@
 
 .bg-tertiarylight:hover {
     background-color: #f8a531 !important;
+    transition: 0.4s;
     color: white;
 }
 
@@ -81,8 +97,21 @@
     color: white;
 }
 
+.bg-primaryorange:hover {
+    background-color: white !important;
+    transition: 0.4s;
+    color: #ED7D31;
+}
+
+.bg-primaryorange:focus {
+    background-color: white !important;
+    outline:0;
+    color: #ED7D31;
+}
+
 .bg-tertiaryorange:hover {
     background-color: #ED7D31 !important;
+    transition: 0.4s;
     color: white;
 }
 
